@@ -48,21 +48,19 @@ include '../includes/navigation-guest.php';
     </form>
 
     <div class='artwork-gallery'> <!-- Main gallery container -->
-        <?php if ($result->num_rows > 0): ?>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <?php $artworkID = htmlspecialchars($row['artworkID']); ?>
-                <?php $redirectUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/Art%20in%20Angono/guests/guest-art-info.php?id=' . urlencode($artworkID); ?>
-                <a href='<?php echo $redirectUrl; ?>' class='artwork-item'> <!-- Artwork box container with link -->
-                    <img src='<?php echo htmlspecialchars($row['imagePath']); ?>' alt='<?php echo htmlspecialchars($row['title']); ?>' />
-                    <h3><?php echo htmlspecialchars($row['title']); ?></h3>
-                    <p>Artist: <?php echo htmlspecialchars($row['artistName']); ?></p> <!-- Display artist name -->
-                </a>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>No artworks found.</p>
-        <?php endif; ?>
-        
-    </div> <!-- Close the gallery -->
+    <?php if ($result->num_rows > 0): ?>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <?php $artworkID = htmlspecialchars($row['artworkID']); ?>
+            <a href='guest-art-info.php?id=<?php echo urlencode($artworkID); ?>' class='artwork-item'> <!-- Artwork box container with link -->
+                <img src='<?php echo htmlspecialchars($row['imagePath']); ?>' alt='<?php echo htmlspecialchars($row['title']); ?>' />
+                <h3><?php echo htmlspecialchars($row['title']); ?></h3>
+                <p>Artist: <?php echo htmlspecialchars($row['artistName']); ?></p> <!-- Display artist name -->
+            </a>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>No artworks found.</p>
+    <?php endif; ?>
+</div> <!-- Close the gallery -->
     <!-- Pagination -->
 <div class="pagination">
     <?php if ($page > 1): ?>
