@@ -1,0 +1,233 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C1121F;
+    padding: 10px 60px;
+    flex-shrink: 0;
+    z-index: 5;
+    position: relative;
+}
+
+.navbar a {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 14px 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    color: #d84545;
+}
+
+.navbar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 110px;
+    height: 110px;
+    margin-right: 30px;
+}
+
+.navbar .menu a {
+    margin-left: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+    }
+    .navbar .menu a {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+.background-container {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('https://i.imgur.com/TfIK2mD.jpg'); /* Updated background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1; /* Ensure the background is below the content */
+}
+
+/* Overlay effect for the background */
+.background-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 236, 236, 0.6); /* Light overlay */
+    z-index: 1;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 2;
+    overflow: auto;
+}  
+
+.gallery-museum {
+    display: flex;
+    flex-wrap: wrap; /* Allows artworks to wrap to the next line */
+    justify-content: space-around; /* Distribute the artworks evenly */
+    padding: 20px; /* Add padding around the gallery */
+}
+
+.artwork {
+    position: relative;
+    width: 200px; /* Set a fixed width for each artwork */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.artwork img {
+    width: 100%; /* Make the image responsive to the container */
+    height: auto; /* Keep the aspect ratio */
+    border-radius: 5px; /* Slightly rounded image corners */
+    margin-bottom: 10px;
+}
+
+.artwork h3, .artwork p {
+    margin: 5px 0; /* Adjust the spacing for titles and descriptions */
+    color: white; /* Ensure text is readable */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Text shadow for better readability */
+}
+
+/* Checkbox Styling */
+.artwork input[type="checkbox"] {
+    position: absolute; /* Position the checkbox */
+    top: 10px; /* Adjust the distance from the top */
+    left: 10px; /* Adjust the distance from the left */
+    transform: scale(1.2); /* Slightly increase the size of the checkbox */
+    z-index: 2; /* Ensure checkbox is above other elements */
+}
+
+/* Artwork Details Styling */
+.artwork-details-container {
+    width: 80%; /* Or any desired width */
+    max-width: 500px; /* Max width for larger screens */
+    margin: 0 auto; /* Center horizontally */
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #C1121F; /* White background for details */
+    border-radius: 8px; /* Rounded corners */
+    position: relative;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    padding: 50px; /* Padding inside the container */
+}
+
+.artwork-title {
+    font-size: 30px; /* Larger font size for title */
+    margin-bottom: 10px; /* Space below the title */
+    text-align: center; /* Justify the title */
+}
+
+.artwork-image {
+    width: 100%; /* Make image responsive */
+    height: 80%; /* Keep aspect ratio */
+    border-radius: 5px; /* Slightly rounded image corners */
+    margin-bottom: 20px; /* Space below the image */
+}
+
+.image-wrapper {
+    opacity: 0.7; /* Adjust opacity of the image wrapper */
+}
+
+strong {
+    color: white; 
+    font-weight: 1000;
+}
+
+p {
+    line-height: 1.6; /* Improve readability */
+    margin-bottom: 10px; /* Space below paragraphs */
+    text-align: left; /* Justify paragraphs */
+}
+p span {
+    text-align: center;
+}
+
+.artwork-details-container p {
+    margin: 0; /* Remove default margin for <p> inside container */
+}
+
+.artwork-gallery,
+.artwork-artist {
+    text-align: center;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+
+
+.artwork-description,
+.artwork-medium,
+.artwork-dimensions, 
+.artwork-email,
+.artwork-link,
+.artwork-contact {
+    display: inline; /* Each detail on a new line */
+    margin-bottom: 5px; /* Space between details */
+}
+
+.button-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 3; /* Increase this to ensure it's on top */
+}
+
+.btn.edit, .btn.exit {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 2px solid #f9f9f9;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+.btn.exit {
+    background-color: red;
+}
+
+.btn.edit {
+    background-color: yellow;
+}
+
+.btn.exit:hover {
+    background-color: darkred;
+}
+
+.btn.edit:hover {
+    background-color: darkgoldenrod;
+}

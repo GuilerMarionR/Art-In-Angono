@@ -1,0 +1,168 @@
+/* ADMIN ADD EVENT */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C1121F;
+    padding: 10px 60px;
+    flex-shrink: 0;
+    z-index: 5;
+    position: relative;
+}
+
+.navbar a {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 14px 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    color: #d84545;
+}
+
+.navbar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 110px;
+    height: 110px;
+    margin-right: 30px;
+}
+
+.navbar .menu a {
+    margin-left: 50px;
+}
+
+
+.content {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(156, 156, 156, 0.5); /* Semi-transparent overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.text-section {
+    position: absolute;
+    left: 5%;
+    top: 0;
+    bottom: 0; /* Ensure it takes the full height of the parent container */
+    background-color: rgba(181, 245, 250, 0.5);
+    padding: 2rem;
+    width: 90%; /* Width adapts to screen size */
+    max-width: 500px; /* Limit max width for larger screens */
+    z-index: 2;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.text-section .title {
+    font-size: 36px;
+    font-weight: bold;
+}
+.text-section .details {
+    font-size: 18px;
+    margin-top: 10px;
+}
+.description {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 18px;
+    width: 80%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+}
+.footer {
+    background-color: #c00;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    margin-top: auto;
+}
+#image-upload {
+    display: none;
+}
+.save-button, .close-button {
+    background-color: #c00;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 30px;
+    display: block;
+    width: 150px;
+    align-self: flex-end;
+    margin-right: 200px;
+}
+.close-button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.image-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-image-icon {
+    font-size: 60px; /* Adjust size as needed */
+    color: #ffffff; /* White color for contrast */
+    opacity: 0.8;
+    align-items: center;
+}
+
+/* Hover effect to make the icon more visible */
+.image-upload-label:hover .add-image-icon {
+    opacity: 1;
+}
+
+.uploaded-image {
+    position: absolute; /* Position it absolutely within the content */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover the full width of the container */
+    height: 100%; /* Cover the full height of the container */
+    object-fit: cover; /* Ensure the image covers the area without distortion */
+    z-index: 1; /* Place it behind the text section but in front of the overlay */
+}

@@ -1,0 +1,130 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C1121F;
+    padding: 10px 60px;
+    flex-shrink: 0;
+    z-index: 5;
+    position: relative;
+}
+
+.navbar a {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 14px 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    color: #d84545;
+}
+
+.navbar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 110px;
+    height: 110px;
+    margin-right: 30px;
+}
+
+.navbar .menu a {
+    margin-left: 50px;
+}
+
+.background-container {
+    position: absolute;
+    width: 100%;
+    background-image: url('https://i.imgur.com/gunBg6r.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.background-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 236, 236, 0.6);
+    z-index: 1;
+}
+
+
+.receipt-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: auto;
+    z-index: 2;
+}
+
+.receipt-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.receipt-details {
+    margin-bottom: 20px;
+}
+
+.receipt-details p {
+    margin: 5px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center buttons */
+    margin-top: 10px;
+    margin-bottom: 40px;
+    z-index: 2;
+}
+
+.cancel-button,
+.submit-button {
+    background-color: #007BFF; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.cancel-button:hover,
+.submit-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

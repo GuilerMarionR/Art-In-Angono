@@ -1,0 +1,1440 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C1121F;
+    padding: 10px 60px;
+    flex-shrink: 0;
+    z-index: 5;
+    position: relative;
+}
+
+
+.navbar a {
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    padding: 14px 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    color: #d84545;
+}
+
+.navbar .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 110px;
+    height: 110px;
+    margin-right: 30px;
+}
+
+.navbar .menu a {
+    margin-left: 50px;
+}
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+    }
+    .navbar .menu a {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+}
+
+
+/* BUTTONS */
+
+button {
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #790707;
+    background: transparent;
+    color: #000000;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s ease, width 0.3s ease;
+}
+
+button:hover {
+    background-color: #790707;
+    color: white;
+}
+
+
+/* HOMEPAGE */
+
+.background-container {
+    position: fixed; /* Change to fixed for background */
+    width: 100%;
+    height: 100%; /* Ensure it covers the full viewport height */
+    background-image: url('https://i.imgur.com/TfIK2mD.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.background-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 236, 236, 0.6);
+    z-index: 2; /* Ensure this is above the background */
+}
+
+.heading {
+    position: relative;
+    z-index: 3;
+    color: #000;
+    text-align: left;
+    padding-top: 15%;
+    font-size: 40px;
+    margin-left: 141px;
+    font-weight: 600;
+}
+
+.subheading {
+    position: relative;
+    z-index: 3;
+    color: #000;
+    text-align: left;
+    width: 555px;
+    height: 118px;
+    margin-left: 141px;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.app-download-section {
+    position: absolute; 
+    top: 660px;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 2; 
+    width: 1152px;
+    height: 200px;
+    flex-shrink: 0;
+    border: 1px solid #000;
+    background: linear-gradient(90deg, rgba(239, 152, 159, 0.00) 0%, #C1121F 100%), #D9D9D9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.app-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative; 
+}
+
+.app-content img {
+    position: absolute;
+    left: -200px;
+}
+
+.app-text {
+    max-width: 600px;
+    text-align: left;
+}
+
+
+
+
+/* GUEST-MUSEUMS */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    color: #333;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.pagination a.active {
+    background-color: #333;
+    color: white;
+    border: 1px solid #333;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+.museum-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://i.imgur.com/TfIK2mD.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keeps background fixed on scroll */
+    z-index: -1; /* Sends background behind the content */
+    top: 0;
+    left: 0;
+}
+
+/* Overlay on top of the background */
+.museum-background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 236, 236, 0.6); /* Semi-transparent overlay */
+    z-index: -1;
+}
+
+/* Content styles */
+.museum-content {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.gallery {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 80px; /* Gap between rows */
+    padding: 40px 144px; /* Padding on the sides for left and right margins */
+    z-index: 2;
+    background: transparent;
+}
+
+.card {
+    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.2s;
+    z-index: 3;
+    width: 300px; /* Fixed width */
+    height: 294px; /* Fixed height */
+    margin: 0 auto; /* Center the card in its grid column */
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    width: 100%;
+    height: 60%; 
+    object-fit: cover; 
+}
+
+.card h3 {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 18px;
+}
+
+.card p {
+    padding: 0 15px 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+@media screen and (max-width: 900px) {
+    .gallery {
+        grid-template-columns: repeat(2, 1fr); 
+        padding: 40px 60px; 
+        gap: 40px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .gallery {
+        grid-template-columns: 1fr; 
+        padding: 40px 20px; 
+        gap: 30px;
+    }
+}
+
+
+/* GUEST-MUSEUM-INFO */
+.museum-details {
+    width: 80%; /* Set a width for the museum details section */
+    margin: 20px auto; /* Center the section */
+    text-align: center; /* Align text to the left */
+}
+
+.museum-details h2 {
+    font-size: 40px; /* Size for main headings */
+    margin-bottom: 10px; /* Space below headings */
+}
+
+.museum-details h3 {
+    font-size: 30px; /* Size for subheadings */
+    margin-top: 20px; /* Space above subheadings */
+    margin-bottom: 5px; /* Space below subheadings */
+}
+
+.museum-details p {
+    font-size: 25px; /* Font size for paragraphs */
+    line-height: 1.5; /* Line height for readability */
+    margin-bottom: 15px; /* Space below paragraphs */
+}
+
+.featured-collections {
+    background-color: #f0f0f0; /* Gray background */
+    padding: 20px; /* Padding around the section */
+    border-radius: 8px; /* Rounded corners */
+    margin: 20px auto; /* Center the section */
+    width: 80%; /* Set a width for featured collections */
+}
+
+.featured-collections h2 {
+    font-size: 24px; /* Size for the featured collections heading */
+    margin-bottom: 10px; /* Space below heading */
+}
+
+.image-upload {
+    margin-top: 10px; /* Space above image upload section */
+    text-align: center; /* Center the content */
+}
+
+.featured-image {
+    width: 100%; /* Responsive width */
+    max-width: 600px; /* Maximum width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 4px; /* Rounded corners for images */
+    border: 1px solid #ccc; /* Light border around images */
+}
+
+
+
+/* GUEST-NEWS */
+
+/* Section styling for events and upcoming events */
+.events-section, .upcoming-events-section {
+    background-color: #dcdcdc;
+    margin-bottom: 40px;
+    margin-top: 80px;
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-left: auto;  /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 16px;
+    color: #5d5d5d;
+}
+
+.view-all-btn {
+    background-color: transparent; /* Make the background transparent */
+    color: #898989; /* Light gray text color */
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 2px solid #898989; /* Border to match the text color */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Adjust font size to match the image */
+    font-weight: bold; /* Make the text bold */
+    text-align: center;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background-color: #dcdcdc; /* Light gray background on hover */
+    color: #333; /* Darker text color on hover */
+    border-color: #333; /* Darker border color on hover */
+}
+
+
+/* Wrappers for events with horizontal scroll */
+.events-wrapper, .upcoming-events-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* Hide the scroll bar */
+    margin-top: 20px;
+}
+
+.events-grid, .upcoming-events-grid {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling behavior */
+    padding: 10px 0;
+    margin-left: 40px; /* Add space for the arrows */
+    margin-right: 40px; /* Add space for the arrows */
+}
+
+/* Custom scrollbar styles */
+.events-grid::-webkit-scrollbar, 
+.upcoming-events-grid::-webkit-scrollbar {
+    height: 12px; /* Set the height for horizontal scrollbars */
+    background-color: #e0e0e0; /* Light gray background for the scrollbar track */
+    border-radius: 5px; /* Rounded edges for the scrollbar */
+}
+
+.events-grid::-webkit-scrollbar-thumb, 
+.upcoming-events-grid::-webkit-scrollbar-thumb {
+    background-color: #b3b3b3; /* Gray color for the scrollbar handle */
+    border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+}
+
+.events-grid::-webkit-scrollbar-thumb:hover, 
+.upcoming-events-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #8c8c8c; /* Darker gray when hovered */
+}
+
+/* Scroll arrow styling */
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #5d5d5d;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.left-arrow {
+    left: 10px;
+}
+
+.right-arrow {
+    right: 10px;
+}
+
+/* Hide the arrows if there are no scrollable items */
+.scroll-arrow:disabled {
+    display: none;
+}
+
+/* Event card styling */
+.event-card {
+    background-color: white;
+    overflow: hidden;
+    width: 30%; /* Make the width dynamic based on the screen size */
+    max-width: 380px; /* Limit the maximum width of the cards */
+    min-width: 320px; /* Ensure the cards don't get too small */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px;
+}
+
+/* General container for upcoming event cards */
+.upcoming-event-card {
+    display: flex; /* Use flex to align content horizontally */
+    align-items: stretch; /* Ensure all children stretch to the full height */
+    width: 300px; /* Set the width to match the layout */
+    height: 100px; /* Adjust height based on content */
+    margin: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent any overflow of content */
+}
+
+/* Styling the event date */
+.upcoming-event-card .event-date {
+    width: 25%; /* Occupy 30% of the card width */
+    background-color: #000; /* Black background for the date */
+    color: #fff; /* White text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Make the date background stretch to full height */
+    padding: 10px; /* Remove padding to extend to the edges */
+}
+
+/* Style for the event title and details */
+.upcoming-event-card .event-details {
+    width: 75%; /* Occupy the remaining space for details */
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding and border in width calculation */
+    text-align: center; /* Center the text within the details section */
+    gap: 10px; /* Adds space between each detail item */
+}
+
+/* Styling for the event title */
+.upcoming-event-card .event-details h3 {
+    font-size: 18px; /* Adjust the size of the title */
+    font-weight: bold; /* Keep the title bold */
+    margin: 0; /* Remove default margin */
+}
+
+/* Styling for the museum name */
+.upcoming-event-card .event-details .museum-name {
+    font-size: 14px; /* Adjust the size of the museum name */
+    font-weight: normal; /* Set the museum name to normal weight */
+    margin: 0; /* Remove default margin */
+}
+
+/* Styling for the event time */
+.upcoming-event-card .event-details .event-time {
+    font-size: 12px; /* Adjust the size of the time */
+    font-weight: normal; /* Ensure the time is not bold */
+    margin: 0; /* Remove default margin */
+}
+
+
+
+.event-card:hover, .upcoming-event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+.event-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.event-card h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #333;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.event-card p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.event-card .event-date-location {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.upcoming-event-card .event-date {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.footer {
+    background-color: #c00;
+    color: white;
+    height: 50px;
+    width: 100%;
+    position: relative;
+    margin-top: auto; 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width: 768px) {
+    .events-section, .upcoming-events-section {
+        width: 90%;
+    }
+
+    .event-card, .upcoming-event-card {
+        min-width: 200px;
+        max-width: 300px;
+    }
+
+    .scroll-arrow {
+        font-size: 1.5rem; 
+    }
+}
+
+
+
+/* GUEST-EVENTS */
+
+
+.all-events-section {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.all-events-section h2 {
+    text-align: left;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 40px;
+    padding-left: 150px; 
+}
+
+
+#allEventsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    position: relative;
+    width: 80%;
+    max-width: 1200px; 
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+
+.event-date {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    background-color: black;
+    color: white;
+    width: 80px; 
+    height: 150px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 3px;
+}
+
+.event-date span {
+    display: block; 
+    width: 100%;
+    text-align: center; 
+}
+
+.event-date .month {
+    font-size: 14px; 
+    margin-bottom: 2px; 
+}
+
+.event-date .day {
+    font-size: 22px; 
+    font-weight: bold;
+}
+
+
+.event-image {
+    width: 100%;
+    height: 300px; 
+    object-fit: cover; 
+}
+
+
+.event-details {
+    background-color: #e0e0e0; 
+    padding: 20px;
+    text-align: center;
+    height: auto;
+}
+
+.event-details h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #333;
+}
+
+
+.event-details p {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.event-details .museum-info {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+.back-button-container {
+    padding: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.back-button {
+    background-color: #c00; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+
+.back-button:hover {
+    background-color: rgb(255, 0, 0); 
+}
+
+
+@media (max-width: 768px) {
+    .event-image {
+        height: 225px; 
+    }
+    
+    .event-details h3 {
+        font-size: 20px;
+    }
+    
+    .event-details p {
+        font-size: 14px;
+    }
+}
+
+
+.footer {
+    background-color: #c00;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+
+/* GUEST-EVENT-PREVIEW */
+.content {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+.text-section {
+    position: absolute;
+    left: 5%;
+    top: 0;
+    bottom: 0; 
+    background-color: rgba(181, 245, 250, 0.5);
+    padding: 2rem;
+    width: 90%; 
+    max-width: 500px; 
+    z-index: 2;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto; 
+}
+.text-section .title {
+    font-size: 36px;
+    font-weight: bold;
+}
+.text-section .details {
+    font-size: 18px;
+    margin-top: 10px;
+}
+.description {
+    text-align: center;
+    margin: 20px auto;
+    font-size: 18px;
+    width: 80%;
+    padding: 20px;
+}
+
+.back-button {
+    background-color: #c00;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    width: 150px;
+    text-align: center;
+}
+
+.footer {
+    background-color: #c00;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    z-index: 1000; 
+}
+
+/* GUEST-ART */
+.art-background {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('https://i.imgur.com/TfIK2mD.jpg'); /* Updated background image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1; /* Ensure the background is below the content */
+}
+
+/* Overlay effect for the background */
+.art-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(236, 236, 236, 0.6); /* Light overlay */
+    z-index: 1;
+}
+
+/* Ensures that the content stays above the overlay */
+.art-content {
+    position: relative;
+    z-index: 2;
+    overflow: auto;
+}
+
+.gallery-museum {
+    margin-left: 270px;
+    padding: 100px;
+    display: grid; /* Use CSS Grid */
+    grid-template-columns: repeat(2, 1fr); /* Two columns, each taking up equal width */
+    grid-gap: 20px; /* Space between artworks */
+    justify-items: center; /* Center the artworks within their grid cells */
+}
+
+.gallery-guest {
+    display: flex;
+    justify-content: space-around;
+    padding: 100px;
+}
+
+
+.artwork {
+    background-color: #C1121F;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    height: 500px; /* Adjust size accordingly */
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 80px;
+    border-radius: 8px;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.artwork img {
+    width: 100%;
+    height: 80%;
+    border-bottom: 2px solid #494646;
+    border-radius: 8px;
+}
+
+.artwork h3, .artwork p {
+    margin: 10px 0;
+}
+
+.artwork-description {
+    text-align: center; /* Centers the text elements */
+    width: 80%; /* Adjust the width as necessary */
+    max-width: 500px; /* Sets a max-width for larger screens */
+    margin: 150px auto 50px; /* Centering the div vertically and providing some space from the top */
+    display: flex;
+    flex-direction: column; /* Makes the main container column-direction */
+    background-color: #C1121F; /* A light grey color, you can choose any hex color */
+    padding: 50px; /* Adds some padding inside the div */
+    border-radius: 8px;
+    position: relative;
+    color: white;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+
+}
+
+.artwork-description .artwork-image {
+    width: 100%; /* Adjust the width */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 8px; /* Add the border radius */
+    border-bottom: 2px solid #494646; /* Keep the existing bottom border */
+}
+
+.title-and-image {
+    display: flex; /* Enables flexbox */
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Spreads the content to fill available space */
+}
+
+.title-and-image h1 {
+    margin-right: 20px; /* Spacing between title and image */
+}
+
+.title-and-image img {
+    max-width: 100%; /* Limits image width to 50% of its container */
+    height: auto; /* Maintains aspect ratio */
+}
+
+
+
+
+/* GUEST-BOOK */
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(90deg, rgba(239, 152, 159, 0.00) 0%, #D7444D 100%), #D9D9D9;
+    background-position: center;
+}
+
+.book {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #000000;
+}
+
+.book h1 {
+    font-size: 50px;
+    margin-top: 80px;
+}
+
+.book p{
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+
+
+
+/* GUEST-TERMS */
+
+.terms-container {
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    background: linear-gradient(90deg, rgba(239, 152, 159, 0.00) 0%, #D7444D 100%), #D9D9D9;
+}
+
+.terms-box {
+    max-width: 550px; 
+    background-color: #81121f; 
+    color: #fff; 
+    font-family: 'Montserrat', sans-serif; 
+    padding: 60px 30px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.terms-text {
+    padding: 0 20px; 
+    height: 355px; 
+    overflow-y: auto; 
+    font-size: 17px; 
+    font-weight: 400; 
+    color: #f1f1f1; 
+}
+
+.terms-text h2 {
+    color: #f5f5f5; 
+    text-align: center;
+    font-weight: 600;
+    font-size: 19px; 
+}
+
+.button-container {
+    display: flex; 
+    justify-content: center; 
+    margin-top: 20px; 
+}
+
+.btn {
+    width: 200px; 
+    padding: 15px; 
+    margin: 0 10px; 
+    text-align: center; 
+    border-radius: 25px; 
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+
+.red-btn {
+    background-color: #C1121F; 
+    color: white; 
+}
+
+.red-btn:hover {
+    background-color: #fd8892; 
+}
+
+.gray-btn {
+    background-color: #d4d4d4; 
+    color: black; 
+}
+
+.gray-btn:hover {
+    background-color: #555555; 
+}
+
+
+
+
+/* GUEST-FORM */
+
+.form-wrapper {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Make sure it takes the full viewport height */
+    background: linear-gradient(90deg, rgba(239, 152, 159, 0.00) 0%, #D7444D 100%), #D9D9D9;
+    padding: 20px; /* Add padding around the form wrapper */
+}
+
+.container {
+    max-width: 1000px; /* Set a maximum width */
+    width: 100%; /* Full width */
+    height: auto; /* Set height to auto to fit content */
+    min-height: 800px; /* Increased minimum height for the container */
+    background: #fff;
+    padding: 30px 40px; /* Increase padding for more space */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 30px; /* Increase font size for the title */
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 30px; /* Increase margin for spacing */
+    text-align: center; /* Center the title text */
+}
+
+.name-row, .date-time-section {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 60px; /* Increase gap between elements */
+    margin-bottom: 30px; /* Increase margin at the bottom */
+}
+
+.input-box {
+    flex: 1; /* Flex-grow to fill the space */
+    min-width: 220px; /* Set a minimum width for input boxes */
+}
+
+.address {
+    flex: 1 1 100%; /* Full width for the address */
+}
+
+.email {
+    flex: 1 1 100%; /* Adjust width for better spacing */
+}
+
+.age {
+    flex: 1 1 50px; /* Keep the age box size */
+}
+
+.input-box input, .date-box input {
+    height: 20px; /* Increase height for input boxes */
+    width: 100%; /* Full width */
+    padding: 12px; /* Increase padding for input boxes */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: black;
+}
+
+.date-box {
+    flex: 1; 
+}
+
+.time-box {
+    flex: 2; 
+}
+
+.date-box label,
+.time-box p {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center; 
+}
+
+.time-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px; 
+}
+
+.review-button {
+    display: block;
+    margin: 20px auto; 
+    padding: 12px 25px; 
+    background-color: #002d40;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.review-button:hover {
+    background-color: #004d66; 
+}
+
+
+/* GUEST-NOTIFY */
+
+
+/* LOGIN */
+.loginbg {
+    height: 100vh;
+    background: url('https://i.imgur.com/2Ad9Rq8.png') no-repeat center center/cover; /* Background image restored */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+}
+
+.loginbg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(110, 110, 110, 0.5); /* Semi-transparent overlay for better contrast */
+    z-index: 1;
+}
+
+/* Login Box */
+.login-container {
+    position: relative;
+    z-index: 2; /* Ensure login box is above overlay */
+}
+
+.login-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 350px;
+}
+
+.login-box h2 {
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.login-box h2 .lock-icon {
+    font-size: 40px;
+    vertical-align: middle;
+    margin-right: 7px;
+    font-style: normal;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    color: #333;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #d21f26;
+}
+
+/* Forgot Password */
+.forgot-password {
+    color: #d21f26;
+    font-size: 14px;
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Login Button */
+.login-box button {
+    background-color: #d21f26;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+.login-box button:hover {
+    background-color: #a81a20;
+}
+
+/* Error Message */
+#error-message {
+    color: #d21f26;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .login-box {
+        width: 90%;
+        padding: 30px;
+    }
+}
+
+
+
+
+
+
+/* ADMIN-MUSEUMS */
+/* ADMIN-MUSEUM-INFO */
+
+
+/* ADMIN-NEWS */
+
+
+
+
+
+
+
+/* ADMIN-ADD-EVENT */
+
+/* ADMIN-EVENT-PREVIEW */
+
+
+
+
+ /* ADMIN-ART & ADMIN-NEWS & ADMIN-MUSEUMS */
+
+
+
+
+
+
+
+
+
+/* ADMIN-GUEST-LIST */
+/* ADMIN-EDIT-CALENDAR */
+/* ADMIN-GUEST-HISTORY */
+/* ADMIN-PASSWORD */
+
+
+/* LOGOUT */
+.logoutbg {
+    height: 100vh;
+    background: url('https://i.imgur.com/2Ad9Rq8.png') no-repeat center center/cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    position: relative;
+}
+
+.logoutbg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(110, 110, 110, 0.5); 
+    z-index: 1;
+}
+
+.logout-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    width: 700px;
+    height: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+
+
+
+.logout-box h3 {
+    margin-bottom: 20px;
+}
+
+.logout-box button {
+    width: 200px; 
+    padding: 15px; 
+    margin: 0 10px; 
+    text-align: center; 
+    border-radius: 25px; 
+    font-weight: bold; 
+    border: none; 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+.logout-box .btn-yes {
+    background-color: #28a745;
+    color: white;
+}
+
+.logout-box .btn-yes:hover {
+    background-color: #7cff9b;
+    color: rgb(0, 0, 0);
+}
+
+.logout-box .btn-cancel {
+    background-color: #dc3545;
+    color: white;
+}
+
+.logout-box .btn-cancel:hover {
+    background-color: #ff8e99;
+    color: rgb(0, 0, 0);
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
