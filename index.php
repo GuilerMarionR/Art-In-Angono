@@ -8,8 +8,8 @@
 </head>
 <body>
 
-       <!-- Navigation Bar -->
-       <div class="navbar">
+      <!-- Navigation Bar -->
+      <div class="navbar">
         <!-- Logo Section -->
         <div class="logo">
             <img src="https://i.imgur.com/BeaSiLw.png" alt="Logo" class="logo-img">

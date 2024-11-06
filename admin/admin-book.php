@@ -175,7 +175,7 @@ $closedDates = fetchClosedDates($conn, $username);
        <div class="tab-content edit" id="edit-calendar" style="display: none; margin-left: 230px">
     <form method="POST" action="" class="form-inline">
         <label for="date" class="mr-2">Select Date:</label>
-        <input type="date" id="datePicker" name="date" class="form-control mr-2" value="<?php echo $date; ?>">
+        <input type="text" placeholder="YYYY-MM-DD" id="datePicker" name="date" class="form-control mr-2" value="<?php echo $date; ?>">
         <input type="submit" name="toggleDate" class="btn btn-secondary" value="Toggle Date">
     </form>
     <div id="status" class="mt-2 text-center"></div>
@@ -370,13 +370,28 @@ $closedDates = fetchClosedDates($conn, $username);
 
 
 <script>
-    function showSection(sectionId) {
-    var sections = document.querySelectorAll('.tab-content');
-    sections.forEach(function(section) {
-        section.style.display = 'none';
-    });
-    document.getElementById(sectionId).style.display = 'block';
-}
+       $(function() {
+            // Closed dates array from PHP
+            var closedDates = <?php echo json_encode(array_column($closedDates, 'closed_date')); ?>;
+            
+            $("#datePicker").datepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: 0, // Disable all past dates
+                beforeShowDay: function(date) {
+                    var formattedDate = $.datepicker.formatDate('yy-mm-dd', date);
+                    // Disable if the date is in the closedDates array or is before today
+                    return [closedDates.indexOf(formattedDate) === -1];
+                }
+            });
+        });
+
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.tab-content');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
 
 </script>
 </body>

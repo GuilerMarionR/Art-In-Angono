@@ -42,12 +42,13 @@ $totalRow = mysqli_fetch_assoc($totalResult);
 $totalArtworks = $totalRow['total'];
 $totalPages = ceil($totalArtworks / $limit); // Calculate total pages
 
-// Fetch artworks from the database with limit and offset
-$query = "SELECT artistName, title, artworkID, imagePath FROM artworks LIMIT ? OFFSET ?";
+// Fetch artworks from the database with limit and offset, filtering by the logged-in user's username
+$query = "SELECT artistName, title, artworkID, imagePath FROM artworks WHERE museumName = ? LIMIT ? OFFSET ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param("ii", $limit, $offset);
+$stmt->bind_param("sii", $username, $limit, $offset);
 $stmt->execute();
 $result = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>
