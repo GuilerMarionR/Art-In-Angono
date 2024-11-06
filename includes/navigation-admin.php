@@ -18,11 +18,11 @@
         
         <!-- Menu Section -->
         <div class="menu">
-            <a href="admin-home.php">HOME</a>
-            <a href="admin-museums.php">MUSEUMS</a>
-            <a href="admin-news.php">NEWS & EVENTS</a>
-            <a href="admin-art.php">ARTWORKS</a>
-            <a href="admin-book.php">BOOK A TOUR</a>
+            <a href="../admin/admin-home.php">HOME</a>
+            <a href="../admin/admin-museums.php">MUSEUMS</a>
+            <a href="../admin/admin-news.php">NEWS & EVENTS</a>
+            <a href="../admin/admin-art.php">ARTWORKS</a>
+            <a href="../admin/admin-book.php">BOOK A TOUR</a>
             <a href="../logins/logout.php">LOGOUT</a>
         </div>
     </div>

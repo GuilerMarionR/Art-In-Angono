@@ -18,7 +18,7 @@
         
         <!-- Menu Section -->
         <div class="menu">
-            <a href="../guests/guest-home.php">HOME</a>
+            <a href="../index.php">HOME</a>
             <a href="../guests/guest-museums.php">MUSEUMS</a>
             <a href="../guests/guest-news.php">NEWS & EVENTS</a>
             <a href="../guests/guest-art.php">ARTWORKS</a>
