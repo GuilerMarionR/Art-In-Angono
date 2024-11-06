@@ -10,14 +10,19 @@ if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
 
-$query = "SELECT closed_date FROM closed_dates"; // Make sure this matches your DB structure
+// Get museum name from URL parameter
+$museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unknown Museum';
+
+// Assuming $museumName is already set from the GET parameter
+$query = "SELECT closed_date FROM closed_dates WHERE museumName = '$museumName'"; // Filter by museumName
 $result = $db->query($query);
 
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $closedDates[] = $row['closed_date']; // Ensure this is formatted as 'YYYY-MM-DD'
+        $closedDates[] = $row['closed_date']; // Store closed dates for the selected museum
     }
 }
+
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,9 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Retrieve form data from session, if available
 $formData = $_SESSION['formData'] ?? [];
 unset($_SESSION['formData']); // Clear the session data after retrieving
-
-// Get museum name from URL parameter
-$museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unknown Museum';
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +131,7 @@ $museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unkn
                 <div class="date-time-section">
                     <div class="date-box">
                         <label for="date">Date</label>
-                        <input type="date" id="date" name="appointmentDate" value="<?= $formData['appointmentDate'] ?? '' ?>" required>
+                        <input type="text" placeholder="Enter the date here" id="date" name="appointmentDate" value="<?= $formData['appointmentDate'] ?? '' ?>" required>
                     </div>
                     <div class="time-box">
                         <p>Time</p>
@@ -155,27 +157,26 @@ $museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unkn
             </form>
         </div>
     </div>
-    <!-- Confirmation Modal -->
-<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmationModalLabel">Confirm Appointment Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span>&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="confirmationDetails">
-                <!-- Appointment details will be populated here -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" onclick="confirmSubmit()">Confirm and Submit</button>
+
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Confirm Appointment Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="confirmationDetails">
+                    <!-- Appointment details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmSubmit()">Confirm and Submit</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
@@ -183,33 +184,37 @@ $museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unkn
         const closedDates = <?php echo json_encode($closedDates); ?>;
 
         function initializeForm() {
-            const museumName = document.getElementById('museumName').value;
-            document.getElementById('display-museum-name').textContent = museumName;
+    const museumName = document.getElementById('museumName').value;
+    document.getElementById('display-museum-name').textContent = museumName;
 
-            const formData = <?php echo json_encode($formData); ?>;
-            Object.keys(formData).forEach(key => {
-                const input = document.querySelector(`[name="${key}"]`);
-                if (input) input.value = formData[key];
-            });
+    const formData = <?php echo json_encode($formData); ?>;
+    Object.keys(formData).forEach(key => {
+        const input = document.querySelector(`[name="${key}"]`);
+        if (input) input.value = formData[key];
+    });
 
-            // Initialize the datepicker
-            $("#date").datepicker({
-                dateFormat: "yy-mm-dd",
-                beforeShowDay: function(date) {
-                    const dateString = date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
-                    if (closedDates.includes(dateString)) {
-                        return [false, "disabled-date", "Closed on this date"];
-                    }
-                    return [true, ""];
-                },
-                onSelect: function(dateText) {
-                    if (closedDates.includes(dateText)) {
-                        alert("The selected date is unavailable. Please choose another date.");
-                        $(this).val('');  // Clear the selected date
-                    }
-                }
-            });
+    $("#date").datepicker({
+        dateFormat: "dd-mm-yy",
+        beforeShowDay: function(date) {
+            const today = new Date();
+            const formattedToday = $.datepicker.formatDate('yy-mm-dd', today);
+            const dateString = $.datepicker.formatDate('yy-mm-dd', date);
+
+            // Disable previous dates and closed dates specific to the selected museum
+            if (date < today || closedDates.includes(dateString)) {
+                return [false, "disabled-date", "Unavailable date"];
+            }
+            return [true, ""];
+        },
+        onSelect: function(dateText) {
+            const formattedDate = $.datepicker.formatDate('yy-mm-dd', $(this).datepicker('getDate'));
+            if (closedDates.includes(formattedDate)) {
+                alert("The selected date is unavailable. Please choose another date.");
+                $(this).val(''); // Clear the selected date
+            }
         }
+    });
+}
 
         function handleFormReview(event) {
             event.preventDefault();
@@ -220,9 +225,8 @@ $museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unkn
             for (let [key, value] of data.entries()) {
                 details += `<strong>${key.replace(/([A-Z])/g, ' $1').toUpperCase()}:</strong> ${value}<br>`;
             }
-            document.getElementById('confirmationDetails').innerHTML = details;
 
-            // Show confirmation modal
+            $('#confirmationDetails').html(details);
             $('#confirmationModal').modal('show');
         }
 
@@ -230,7 +234,6 @@ $museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unkn
             document.getElementById('appointment-form').submit();
         }
     </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
