@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2024 at 03:02 PM
+-- Generation Time: Nov 06, 2024 at 07:00 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -41,7 +41,7 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `user_name`, `email`, `password`) VALUES
 (1, 'Blanco Family Museum', 'artinangono.blanco@gmail.com', 'blancoangono123'),
 (2, 'Nemiranda Arthouse', 'artinangono.nemiranda@gmail.com', 'nemirandaangono123'),
-(3, 'Nono', 'artinangono.nono@gmail.com', 'nonoangono123'),
+(3, 'Nono Museum', 'artinangono.nono@gmail.com', 'nonoangono123'),
 (4, 'Balagtas Gallerie', 'artinangono.balagtas@gmail.com', 'balagtasangono123'),
 (5, 'Angkla Art Gallery', 'aa.gallery@gmail.com', 'angkla123'),
 (6, 'Balaw-Balaw Gallerie', 'bb.gallerie@gmail.com', 'balawbalaw123'),
@@ -101,6 +101,15 @@ CREATE TABLE `clientbookings` (
   `museumName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `clientbookings`
+--
+
+INSERT INTO `clientbookings` (`bookingID`, `userID`, `lastName`, `firstName`, `middleName`, `address`, `email`, `age`, `contactNumber`, `numberOfGuests`, `appointmentDate`, `appointmentTime`, `museumName`) VALUES
+(1, 'user_672ab3af24d852.72144773', 'Regalado', 'Guiler Marion', 'Ruffy', 'Blk. 5 Lt. 11 Calle Suave Villa Remedios Subdivision', 'marionregalado20@gmail.com', 21, '09982901878', 12, '06-11-2024', 2, 'Blanco Family Museum'),
+(2, 'user_672abd4707fec9.24031829', 'Regalado', 'Guiler Marion', 'Ruffy', 'Blk. 5 Lt. 11 Calle Suave Villa Remedios Subdivision', 'marionregalado20@gmail.com', 21, '09982901878', 10, '02-10-2024', 9, 'Blanco Family Museum'),
+(3, 'user_672ac79fe53208.45439942', 'Regalado', 'Guiler Marion', 'Ruffy', 'Blk. 5 Lt. 11 Calle Suave Villa Remedios Subdivision', 'marionregalado20@gmail.com', 21, '09982901878', 10, '15-11-2024', 8, 'Blanco Family Museum');
+
 -- --------------------------------------------------------
 
 --
@@ -109,8 +118,18 @@ CREATE TABLE `clientbookings` (
 
 CREATE TABLE `closed_dates` (
   `id` int(11) NOT NULL,
-  `closed_date` date NOT NULL
+  `closed_date` date NOT NULL,
+  `museumName` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `closed_dates`
+--
+
+INSERT INTO `closed_dates` (`id`, `closed_date`, `museumName`) VALUES
+(6, '2024-11-08', 'Blanco Family Museum'),
+(7, '2024-11-16', 'Blanco Family Museum'),
+(21, '2024-11-07', 'Blanco Family Museum');
 
 -- --------------------------------------------------------
 
@@ -221,7 +240,7 @@ INSERT INTO `views` (`ViewID`, `museumName`, `360_URL`) VALUES
 (1, 'Blanco Family Museum', 'https://my.matterport.com/show/?m=YUemUS3vsUi'),
 (2, 'Nemiranda Arthouse', 'https://my.matterport.com/show/?m=6ARsg1Lqxsw'),
 (3, 'Balagtas Gallerie', 'https://my.matterport.com/show/?m=jDn55aUEquo'),
-(4, 'Nono', 'https://my.matterport.com/show/?m=tDbvZ76XNTG');
+(4, 'Nono Museum', 'https://my.matterport.com/show/?m=tDbvZ76XNTG');
 
 --
 -- Indexes for dumped tables
@@ -305,13 +324,13 @@ ALTER TABLE `artworks`
 -- AUTO_INCREMENT for table `clientbookings`
 --
 ALTER TABLE `clientbookings`
-  MODIFY `bookingID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `closed_dates`
 --
 ALTER TABLE `closed_dates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `collections`
