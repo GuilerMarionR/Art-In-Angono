@@ -53,7 +53,7 @@ $conn->close(); // Close the database connection
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART IN ANGONO - ADMIN</title>
+    <title>Admin News</title>
     <style>
         /* Add some styles for the modal */
         .modal {
@@ -140,10 +140,7 @@ $conn->close(); // Close the database connection
     </style>
 </head>
 <body>
-    
-    <div class="navbar">
         <?php include '../includes/navigation-admin.php'; ?>
-    </div>
     <div class="museum-background"></div>
         <div class="admin-news-content">
             <div class="button-container">

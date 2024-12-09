@@ -32,9 +32,18 @@ $conn->close(); // Close the database connection
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART IN ANGONO</title>
+    <title>ART IN ANGONO - All News & Events</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
+        /* General container style */
+        .container {
+            background-color: white; /* White background */
+            margin: 0 auto; /* Center container */
+            padding: 20px; /* Padding for spacing */
+            max-width: 1200px; /* Max width to prevent too wide content */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
         /* Add some styles for the modal */
         .modal {
             display: none; 
@@ -114,13 +123,13 @@ $conn->close(); // Close the database connection
             border-radius: 5px; /* Rounded corners */
             cursor: pointer; /* Pointer cursor */
             font-size: 16px; /* Font size */
+            text-decoration: none;
             transition: background-color 0.3s; /* Transition for hover effect */
         }
 
         .back-button:hover {
             background-color: #0056b3; /* Darker blue on hover */
         }
-
         .pagination {
             margin: 20px 0; /* Margin for pagination */
             display: flex;
@@ -146,18 +155,30 @@ $conn->close(); // Close the database connection
             margin: 0 5px; /* Space between pagination numbers */
             padding: 10px; /* Padding for numbers */
         }
+        
     </style>
 </head>
 <body>
 <div class="museum-background"></div>
-    <?php include '../includes/navigation-guest.php'; ?>
 
-    <!-- Back Button -->
-    <div class="back-button-container">
-        <button class="back-button" onclick="goBack()">Back</button>
-    </div>
+<?php 
+    // Check if the user is logged in by checking for the session username
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        // If logged in, include the logged-in navbar
+        include '../includes/navigation-loggedin.php';
+    } else {
+        // If not logged in, include the guest navbar
+        include '../includes/navigation-guest.php';
+    }
+?>
 
-    <!-- Main Content -->
+<!-- Back Button-->
+<div class="back-button-container">
+    <a href="guest-news.php" class="back-button">Back</a>
+</div>
+
+<!-- Main Content -->
+<div class="container">
     <main>
         <section class="all-events-section">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -198,57 +219,58 @@ $conn->close(); // Close the database connection
             </div>
         </section>
     </main>
+</div>
 
-    <!-- Modal for displaying event details -->
-    <div id="eventModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Event Details</h2>
-            <p><strong>What:</strong> <span id="eventTitle"></span></p>
-            <p><strong>Where:</strong> <span id="eventMuseum"></span></p>
-            <p><strong>When:</strong> <span id="eventDate"></span></p>
-            <p><strong>Description:</strong> <span id="eventDescription"></span></p>
-            <img id="eventImage" src="" alt="" style="max-width: 100%;">
-        </div>
+<!-- Modal for displaying event details -->
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Event Details</h2>
+        <p><strong>What:</strong> <span id="eventTitle"></span></p>
+        <p><strong>Where:</strong> <span id="eventMuseum"></span></p>
+        <p><strong>When:</strong> <span id="eventDate"></span></p>
+        <p><strong>Description:</strong> <span id="eventDescription"></span></p>
+        <img id="eventImage" src="" alt="" style="max-width: 100%;">
     </div>
+</div>
 
-    <!-- JavaScript to load the events -->
-    <script src="../js/script.js"></script> <!-- Link to your script -->
+<!-- JavaScript to load the events -->
+<script src="../js/script.js"></script> <!-- Link to your script -->
 
-    <script>
-        function goBack() {
-            window.history.back(); // Navigate to the previous page
-        }
+<script>
+    function goBack() {
+        window.history.back(); // Navigate to the previous page
+    }
 
-        function showEventDetails(title, museumName, date, description, image) {
-            // Populate the modal with event details
-            document.getElementById("eventTitle").innerText = title;
-            document.getElementById("eventMuseum").innerText = museumName;
-            document.getElementById("eventDate").innerText = date;
-            document.getElementById("eventDescription").innerText = description;
-            document.getElementById("eventImage").src = image;
+    function showEventDetails(title, museumName, date, description, image) {
+        // Populate the modal with event details
+        document.getElementById("eventTitle").innerText = title;
+        document.getElementById("eventMuseum").innerText = museumName;
+        document.getElementById("eventDate").innerText = date;
+        document.getElementById("eventDescription").innerText = description;
+        document.getElementById("eventImage").src = image;
 
-            document.getElementById("eventModal").style.display = "block"; // Show the modal
-        }
+        document.getElementById("eventModal").style.display = "block"; // Show the modal
+    }
 
-        function closeModal() {
-            document.getElementById("eventModal").style.display = "none"; // Hide the modal
-        }
+    function closeModal() {
+        document.getElementById("eventModal").style.display = "none"; // Hide the modal
+    }
 
-        function filterEvents() {
-            // Add filter functionality here
-            let input = document.getElementById("searchInput").value.toLowerCase();
-            let cards = document.querySelectorAll(".event-card");
-            cards.forEach(card => {
-                let title = card.querySelector("h3").innerText.toLowerCase();
-                let museum = card.querySelector("p strong").nextSibling.textContent.toLowerCase();
-                if (title.includes(input) || museum.includes(input)) {
-                    card.style.display = ""; // Show the card
-                } else {
-                    card.style.display = "none"; // Hide the card
-                }
-            });
-        }
-    </script>
+    function filterEvents() {
+        // Add filter functionality here
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.querySelectorAll(".event-card");
+        cards.forEach(card => {
+            let title = card.querySelector("h3").innerText.toLowerCase();
+            let museum = card.querySelector("p strong").nextSibling.textContent.toLowerCase();
+            if (title.includes(input) || museum.includes(input)) {
+                card.style.display = ""; // Show the card
+            } else {
+                card.style.display = "none"; // Hide the card
+            }
+        });
+    }
+</script>
 </body>
 </html>

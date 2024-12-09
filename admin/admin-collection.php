@@ -134,7 +134,11 @@ $conn->close();
             transform: translate(-50%, -50%);
             font-size: 2em;
             color: rgba(255, 255, 255, 0.3);
-            pointer-events: none;
+            pointer-events: none;  
+            border: 3px solid rgba(255, 255, 255, 0.7); /* Add border */
+            border-radius: 5px; /* Optional: for rounded corners */
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background */
+       
         }
 
         .modal-info {

@@ -18,7 +18,7 @@ if (isset($_POST['logout_confirm'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Logout Confirmation</title>
+    <title>Logout Confirmation</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -28,7 +28,7 @@ if (isset($_POST['logout_confirm'])) {
         <!-- Logo Section -->
         <div class="logo">
             <img src="https://i.imgur.com/BeaSiLw.png" alt="Art in Angono Logo" class="logo-img">
-            <span>ART IN ANGONO - ADMIN</span>
+            <span>ART IN ANGONO</span>
         </div>
 
         <!-- Menu Section -->

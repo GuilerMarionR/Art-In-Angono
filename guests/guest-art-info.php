@@ -1,4 +1,5 @@
 <?php 
+session_start();
 // Include your database connection
 include '../includes/db_connections.php';
 
@@ -47,7 +48,7 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART IN ANGONO</title>
+    <title>ART IN ANGONO - ArtWork Details</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
         body {
@@ -131,7 +132,16 @@ if (isset($_GET['id'])) {
 <body oncontextmenu="return false;">
 <div class="museum-background"></div>
 
-<?php include '../includes/navigation-guest.php'; ?>
+<?php 
+    // Check if the user is logged in by checking for the session username
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        // If logged in, include the logged-in navbar
+        include '../includes/navigation-loggedin.php';
+    } else {
+        // If not logged in, include the guest navbar
+        include '../includes/navigation-guest.php';
+    }
+    ?>
 
 <div class="artwork-details">
     <h1>Artwork Details</h1>
@@ -177,22 +187,48 @@ if (isset($_GET['id'])) {
     const ctx = zoomedCanvas.getContext('2d');
 
     artworkImg.onclick = function() {
-        const img = new Image();
-        img.src = artworkImg.src;
-        img.onload = function() {
-            zoomedCanvas.width = img.width;
-            zoomedCanvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-            
-            // Add dynamic watermark with museumName
-            ctx.font = 'bold 100px Arial';
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-            ctx.textAlign = 'center';
-            ctx.fillText('<?php echo $museumName; ?>', zoomedCanvas.width / 2, zoomedCanvas.height / 2);
+    const img = new Image();
+    img.src = artworkImg.src;
+    img.onload = function() {
+        zoomedCanvas.width = img.width;
+        zoomedCanvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        
+        // Watermark Text Settings
+        const watermarkText = '<?php echo $museumName; ?>';
+        const fontSize = 30;  // Adjust this size based on your preference
+        ctx.font = `bold ${fontSize}px Arial`;  // Font style and size
+        ctx.textAlign = 'center';  // Center the text horizontally
+        ctx.textBaseline = 'middle';  // Center the text vertically
+        const textX = zoomedCanvas.width / 2;  // X position of the text
+        const textY = zoomedCanvas.height / 2;  // Y position of the text
 
-            imageOverlay.style.display = 'flex';
-        };
+        // Measure the width and height of the text
+        const textWidth = ctx.measureText(watermarkText).width;
+        const textHeight = fontSize;  // Approximate height of the text (font size)
+
+        // Add the border box around the watermark text
+        const padding = 10;  // Add some padding around the text
+        const boxX = textX - textWidth / 2 - padding;
+        const boxY = textY - textHeight / 2 - padding;
+        const boxWidth = textWidth + 2 * padding;
+        const boxHeight = textHeight + 2 * padding;
+
+        // Draw the border box (rectangular box around text)
+        ctx.lineWidth = 5;  // Border width of the box
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.7)';  // Border color (light transparent white)
+        ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);  // Draw the border box
+
+        // Add the watermark text (fill text inside the border box)
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';  // Watermark color with transparency
+        ctx.fillText(watermarkText, textX, textY);  // Draw the watermark text
+
+        // Show the overlay with the zoomed image and watermark
+        imageOverlay.style.display = 'flex';
     };
+};
+
+
 
     imageOverlay.onclick = function() {
         imageOverlay.style.display = 'none';
@@ -200,13 +236,34 @@ if (isset($_GET['id'])) {
 
     // Speech functions
     function speakText(text) {
-        if (speech) {
-            window.speechSynthesis.cancel(); // Stop any ongoing speech
-        }
-        speech = new SpeechSynthesisUtterance(text);
-        speech.lang = 'en-US'; // Set language
-        window.speechSynthesis.speak(speech);
+    if (speech) {
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
     }
+    speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'en-US'; // Set language
+
+    // Set voice to a more human-like option, if available
+    let voices = window.speechSynthesis.getVoices();
+    let selectedVoice = null;
+    
+    // Try to select a more natural voice
+    voices.forEach(function(voice) {
+        if (voice.name === 'Google UK English Female' || voice.name === 'Google US English') {
+            selectedVoice = voice;
+        }
+    });
+
+    if (selectedVoice) {
+        speech.voice = selectedVoice;
+    }
+
+    // Set additional voice properties for a more natural sound
+    speech.pitch = 1;  // Normal pitch (can be adjusted for a more natural sound)
+    speech.rate = 1.0;   // Normal speed (can be adjusted for a more natural rhythm)
+    speech.volume = 1;   // Volume (0 to 1, where 1 is maximum)
+
+    window.speechSynthesis.speak(speech);
+}
 
     function pauseSpeech() {
         window.speechSynthesis.pause();

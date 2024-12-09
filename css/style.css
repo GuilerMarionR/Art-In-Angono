@@ -118,21 +118,14 @@ button:hover {
     position: relative;
     z-index: 3;
     color: #000;
-    text-align: left;
-    padding-top: 15%;
     font-size: 40px;
-    margin-left: 141px;
     font-weight: 600;
 }
-
 .subheading {
     position: relative;
     z-index: 3;
     color: #000;
-    text-align: left;
     width: 555px;
-    height: 118px;
-    margin-left: 141px;
     font-size: 20px;
     font-weight: 200;
 }
@@ -171,6 +164,16 @@ button:hover {
 .app-text {
     max-width: 600px;
     text-align: left;
+}
+
+/* Specific styling for welcome image */
+.welcome-image {
+    flex: 0 0 auto;
+    position: relative; /* To isolate its position */
+    z-index: 2; /* Ensures it is above the background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

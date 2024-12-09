@@ -1,3 +1,7 @@
+<?php
+// Start the session
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,12 +105,17 @@
 
         .modal-watermark {
             position: absolute;
-            bottom: 20px; /* Position at the bottom */
-            right: 20px; /* Position at the right */
-            font-size: 2em;
-            color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
-            pointer-events: none; /* Prevent mouse events */
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 30px; /* Adjusted to 30px */
+            pointer-events: none;
+            font-weight: bold; /* Bold for emphasis */
+            text-align: center; /* Center alignment */
+            border: 3px solid rgba(255, 255, 255, 0.7); /* Add border */
+            border-radius: 5px; /* Optional: for rounded corners */
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background */
         }
 
         .modal-info {
@@ -150,15 +159,35 @@
             document.getElementById("imageModal").style.display = "none";
         }
 
-        // Speech functions
         function speakText(text) {
-            if (speech) {
-                window.speechSynthesis.cancel(); // Stop any ongoing speech
-            }
-            speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-US'; // Set language
-            window.speechSynthesis.speak(speech);
+    if (speech) {
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
+    }
+    speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'en-US'; // Set language
+
+    // Set voice to a more human-like option, if available
+    let voices = window.speechSynthesis.getVoices();
+    let selectedVoice = null;
+    
+    // Try to select a more natural voice
+    voices.forEach(function(voice) {
+        if (voice.name === 'Google UK English Female' || voice.name === 'Google US English') {
+            selectedVoice = voice;
         }
+    });
+
+    if (selectedVoice) {
+        speech.voice = selectedVoice;
+    }
+
+    // Set additional voice properties for a more natural sound
+    speech.pitch = 1;  // Normal pitch (can be adjusted for a more natural sound)
+    speech.rate = 1.0;   // Normal speed (can be adjusted for a more natural rhythm)
+    speech.volume = 1;   // Volume (0 to 1, where 1 is maximum)
+
+    window.speechSynthesis.speak(speech);
+}
 
         function pauseSpeech() {
             window.speechSynthesis.pause();
@@ -202,8 +231,16 @@
 </head>
 <body>
 
-<?php include '../includes/navigation-guest.php'; ?>
-
+<?php 
+    // Check if the user is logged in by checking for the session username
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        // If logged in, include the logged-in navbar
+        include '../includes/navigation-loggedin.php';
+    } else {
+        // If not logged in, include the guest navbar
+        include '../includes/navigation-guest.php';
+    }
+    ?>
 <?php
 // Initialize $collections as an empty array
 $collections = [];

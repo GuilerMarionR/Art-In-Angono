@@ -1,0 +1,137 @@
+/* General Reset for some basic elements */
+body, h1,  table {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+h3{
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Background color for the page */
+.museum-background {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Styling the header */
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout for Forms */
+.form-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 20px; /* Spacing between the forms */
+    justify-items: center; /* Center the forms */
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure forms take up the full available width of their grid cell */
+    box-sizing: border-box;
+}
+
+/* Form Elements */
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="time"],
+form input[type="date"],
+form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form input[readonly] {
+    background-color: #f0f0f0;
+}
+
+form button {
+    background-color: #c41919;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 160px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #61707f;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table, td{
+    border: 1px solid #ddd;
+}
+th{
+    background-color: #c41919; /* Red background for the table header */
+}
+thead {
+    background-color:#c41919; /* Red background for the table header */
+    color: white;
+}
+
+th {
+    padding: 10px;
+    text-align: left;
+}
+
+tbody {
+    background-color: white; /* White background for the table body */
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Action Links Styling */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Calendar input styling */
+#calendar, #closed_date, #closed_time_date {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

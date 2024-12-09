@@ -63,7 +63,6 @@
             max-height: 90%;
             position: relative;
         }
-
         .watermark {
             position: absolute;
             top: 50%;
@@ -74,6 +73,10 @@
             pointer-events: none;
             font-weight: bold; /* Bold for emphasis */
             text-align: center; /* Center alignment */
+            border: 3px solid rgba(255, 255, 255, 0.7); /* Add border */
+            border-radius: 5px; /* Optional: for rounded corners */
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background */
+       
         }
         .featured-collections {
     position: relative; /* Allow absolute positioning of child elements */

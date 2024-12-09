@@ -10,14 +10,21 @@ use PHPMailer\PHPMailer\Exception;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
 
-    // Check if email exists in the admins table
-    $sql = "SELECT * FROM admins WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Check if email exists in the guests table
+    $sql_guests = "SELECT * FROM guests WHERE email = ?";
+    $stmt_guests = $conn->prepare($sql_guests);
+    $stmt_guests->bind_param("s", $email);
+    $stmt_guests->execute();
+    $result_guests = $stmt_guests->get_result();
 
-    if ($result->num_rows > 0) {
+    // Check if email exists in the admins table
+    $sql_admins = "SELECT * FROM admins WHERE email = ?";
+    $stmt_admins = $conn->prepare($sql_admins);
+    $stmt_admins->bind_param("s", $email);
+    $stmt_admins->execute();
+    $result_admins = $stmt_admins->get_result();
+
+    if ($result_guests->num_rows > 0 || $result_admins->num_rows > 0) {
         // Generate OTP
         $otp = rand(100000, 999999);
 
@@ -32,9 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Format the time as needed (e.g., 'Y-m-d H:i:s' for MySQL datetime)
         $expires_at = $currentTime->format('Y-m-d H:i:s');
-
-        // Now you can use $expires_at in your code
-        echo $expires_at;
 
         // Insert OTP and expiration time into otp_codes table
         $sql = "INSERT INTO otp_codes (email, otp, expires_at) VALUES (?, ?, ?)";
@@ -56,14 +60,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Password = 'hlxy qreo jvpe rngy'; // Replace with your actual Gmail password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Use TLS encryption
             $mail->Port = 587; // TCP port to connect to
-            
+
             // Debugging output
             $mail->SMTPDebug = 2; // Set to 0 to disable debug output, 2 for detailed output
 
             // Recipients
             $mail->setFrom('artinangono@gmail.com', 'Art in Angono'); // Replace with your sender email
             $mail->addAddress($email); // Recipient email
-            $mail->Subject = 'Password Reset OTP';
+            $mail->Subject = 'OTP for Email Verification';
             $mail->isHTML(true); // Set email format to HTML
             $mail->Body = "Your OTP code is <strong>$otp</strong>";
 
@@ -76,10 +80,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error sending email: {$mail->ErrorInfo}";
         }
     } else {
-        echo "Email not found.";
+        echo "Email not found in guests or admins table.";
     }
 
-    $stmt->close(); // Close the prepared statement
+    // Close the prepared statements
+    $stmt_guests->close();
+    $stmt_admins->close();
     $conn->close(); // Close the database connection
 }
 ?>
@@ -109,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for="email">Email Address:</label>
                         <input type="email" name="email" id="email" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-danger btn-block"  style="margin-left: 100px;">Submit</button>
+                    <button type="submit" class="btn btn-danger btn-block" style="margin-left: 100px;">Submit</button>
                 </form>
             </div>
         </div>
@@ -120,4 +126,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

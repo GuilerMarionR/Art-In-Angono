@@ -1,4 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ART IN ANGONO - Arts</title>
 <?php
+session_start();
 // Database connection
 $servername = "localhost"; // Your server name
 $username = "root"; // Your database username
@@ -36,8 +43,17 @@ $totalStmt->fetch();
 $totalPages = ceil($totalArtworks / $limit);
 $totalStmt->close();
 
-include '../includes/navigation-guest.php';
+
+// Check if the user is logged in by checking for the session username
+if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+    // If logged in, include the logged-in navbar
+    include '../includes/navigation-loggedin.php';
+} else {
+    // If not logged in, include the guest navbar
+    include '../includes/navigation-guest.php';
+}
 ?>
+
 
 <!-- Container for Search Form and Artwork Gallery -->
 <div class="museum-background"></div>

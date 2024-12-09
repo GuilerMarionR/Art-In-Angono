@@ -26,12 +26,23 @@ if ($result->num_rows > 0) {
     $museumName = htmlspecialchars($museum['name']);
     $museumHistory = htmlspecialchars($museum['history']);
     $museumDescription = htmlspecialchars($museum['description']);
+    $museumViews = htmlspecialchars($museum['views']); // Get the views count
 } else {
     $museumName = "Museum not found";
     $museumHistory = "No history available.";
     $museumDescription = "No description available.";
+    $museumViews = "N/A"; // Default value for views if no museum is found
 }
 
+// Fetch total visits based on bookings for the museum
+$sql = "SELECT COUNT(*) AS totalVisits FROM clientbookings WHERE museumName = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $museumName);
+$stmt->execute();
+$result = $stmt->get_result();
+$totalVisits = $result->fetch_assoc()['totalVisits']; // Get the total number of visits
+
+$stmt->close();
 // Fetch views associated with this museum
 $views = [];
 $sql = "SELECT 360_URL FROM views WHERE museumName = ?";
@@ -175,7 +186,10 @@ $conn->close();
             color: rgba(255, 255, 255, 0.5);
             font-size: 50px;
             pointer-events: none;
-            white-space: nowrap;
+            white-space: nowrap;  border: 3px solid rgba(255, 255, 255, 0.7); /* Add border */
+            border-radius: 5px; /* Optional: for rounded corners */
+            background-color: rgba(0, 0, 0, 0.5); /* Optional: add a semi-transparent background */
+       
         }
         .featured-collections-header {
     display: flex;
@@ -205,7 +219,35 @@ $conn->close();
 .view-all-button:hover {
     background-color: grey; /* Darker shade on hover */
 }
+.museum-views {
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid #C1121F; /* Red border color */
+    padding: 10px;
+    border-radius: 5px; /* Optional: rounded corners */
+    background-color: #f9f9f9; /* Optional: light background color */
+}
 
+.views-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Create two equal columns */
+    gap: 20px; /* Space between the columns */
+    justify-items: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
+}
+
+.views-row p {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+    margin: 0; /* Remove default margin for better alignment */
+}
+
+@media (max-width: 600px) {
+    .views-row {
+        grid-template-columns: 1fr; /* Stack the items on smaller screens */
+    }
+}
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -230,18 +272,29 @@ $conn->close();
             <p>No 360 view available for this museum.</p>
         <?php endif; ?>
     </div>
-
-    <div class="museum-details">
-        <div class="button-container">
-            <a class="action-button edit-button" href="admin-museum-update-info.php">Edit</a>
-        </div>
-        <h2><?php echo $museumName; ?></h2>
-        <h3>History</h3>
-        <p><?php echo $museumHistory; ?></p>
-
-        <h3>Description</h3>
-        <p><?php echo $museumDescription; ?></p>
+    <!-- Display views and total visits with CSS Grid -->
+    <div class="museum-views" style="text-align: center;">
+    <div class="views-row">
+        <p><strong>Views:</strong> <?php echo $museumViews; ?></p> <!-- Display the views count -->
+        <p><strong>Total Visits:</strong> <?php echo $totalVisits; ?></p> <!-- Display the total visits -->
     </div>
+
+<div class="button-container">
+        <a class="action-button edit-button" href="stats.php">Show</a>
+        </div>
+        </div>
+
+        <div class="museum-details">
+    <div class="button-container">
+        <a class="action-button edit-button" href="admin-museum-update-info.php">Edit</a>
+    </div>
+    <h2><?php echo $museumName; ?></h2>
+    <h3>History</h3>
+    <p style="text-align: left; text-indent: 40px;"><?php echo $museumHistory; ?></p>
+
+    <h3>Description</h3>
+    <p style="text-align: left; text-indent: 40px;"><?php echo $museumDescription; ?></p>
+</div>
 
     <div class="featured-collections">
     <header class="featured-collections-header">

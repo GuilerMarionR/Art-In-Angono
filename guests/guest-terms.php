@@ -1,14 +1,25 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART IN ANGONO</title>
+    <title>ART IN ANGONO - Terms & Conditions</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
-    <?php include '../includes/navigation-guest.php'; ?>
+<?php 
+    // Check if the user is logged in by checking for the session username
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        // If logged in, include the logged-in navbar
+        include '../includes/navigation-loggedin.php';
+    } else {
+        // If not logged in, include the guest navbar
+        include '../includes/navigation-guest.php';
+    }
+    ?>
     <div class="terms-container">
         <div class="terms-box">
             <div class="terms-text">
@@ -34,7 +45,7 @@ These terms and conditions are governed by and construed in accordance with Repu
                 <!-- Add the rest of your terms here -->
             </div>
             <div class="button-container">
-                <button class="btn red-btn" onclick="window.location.href='guest-form.php?museum=<?php echo urlencode($museum); ?>'">AGREE</button>
+                <button class="btn red-btn" onclick="window.location.href='guest-notice.php?museum=<?php echo urlencode($museum); ?>'">AGREE</button>
                 <button class="btn gray-btn" onclick="window.location.href='guest-book.php'">CANCEL</button>
             </div>
         </div>

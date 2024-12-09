@@ -50,7 +50,7 @@ $conn->close(); // Close the database connection
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART IN ANGONO</title>
+    <title>ART IN ANGONO - News & Events</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
         .event-card {
@@ -127,8 +127,16 @@ $conn->close(); // Close the database connection
 </head>
 <body>
 
-    <?php include '../includes/navigation-guest.php'; ?>
-
+<?php 
+    // Check if the user is logged in by checking for the session username
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        // If logged in, include the logged-in navbar
+        include '../includes/navigation-loggedin.php';
+    } else {
+        // If not logged in, include the guest navbar
+        include '../includes/navigation-guest.php';
+    }
+    ?>
     <main>
         <!-- Events Section -->
         <div class="museum-background"></div>

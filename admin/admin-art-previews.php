@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ART IN ANGONO</title>
+    <title>Artwork Details</title>
     <link rel="stylesheet" href="../css/style.css"> <!-- Link to your CSS file for navigation -->
     <style>
         /* Basic styling for testing */

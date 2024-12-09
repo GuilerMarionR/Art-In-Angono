@@ -19,7 +19,7 @@ $museumName = htmlspecialchars($_SESSION['username']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Event - Art In Angono</title>
+    <title>Add Event</title>
     <link rel="stylesheet" href="../css/admin-add-event.css">
     <!-- Ionicons library for icons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

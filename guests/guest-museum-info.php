@@ -1,3 +1,8 @@
+<?php 
+// Start the session
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +31,34 @@
         };
 
         function speakText(text) {
-            if (speech) {
-                window.speechSynthesis.cancel(); // Stop any ongoing speech
-            }
-            speech = new SpeechSynthesisUtterance(text);
-            speech.lang = 'en-US'; // Set language
-            window.speechSynthesis.speak(speech);
+    if (speech) {
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
+    }
+    speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'en-US'; // Set language
+
+    // Set voice to a more human-like option, if available
+    let voices = window.speechSynthesis.getVoices();
+    let selectedVoice = null;
+    
+    // Try to select a more natural voice
+    voices.forEach(function(voice) {
+        if (voice.name === 'Google UK English Female' || voice.name === 'Google US English') {
+            selectedVoice = voice;
         }
+    });
+
+    if (selectedVoice) {
+        speech.voice = selectedVoice;
+    }
+
+    // Set additional voice properties for a more natural sound
+    speech.pitch = 1.2;  // Normal pitch (can be adjusted for a more natural sound)
+    speech.rate = 1.0;   // Normal speed (can be adjusted for a more natural rhythm)
+    speech.volume = 1;   // Volume (0 to 1, where 1 is maximum)
+
+    window.speechSynthesis.speak(speech);
+}
 
         function readMuseumDetails() {
             const name = document.getElementById("display-name").innerText;
@@ -51,11 +77,32 @@
         }
     </script>
 </head>
+<style>
+    .museum-views {
+    text-align: center;
+    margin-bottom: 20px;
+    border: 2px solid #C1121F; /* Add a border */
+    padding: 10px; /* Optional: Add padding for spacing */
+    display: inline-block; /* Optional: Make it a block-level element */
+}
+
+.museum-views p {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+}
+</style>
 <body>
+<?php 
+    // Check if the user is logged in by checking for the session username
+    if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+        // If logged in, include the logged-in navbar
+        include '../includes/navigation-loggedin.php';
+    } else {
+        // If not logged in, include the guest navbar
+        include '../includes/navigation-guest.php';
+    }
 
-    <?php include '../includes/navigation-guest.php'; ?>
-
-    <?php
     // Connect to the database
     $conn = new mysqli('localhost', 'root', '', 'art_in_angono_db');
 
@@ -78,6 +125,19 @@
         exit;
     }
 
+    // Increment the view count in the database on each page load
+    $update_sql = "UPDATE museums SET views = views + 1 WHERE id = $museum_id";
+    $conn->query($update_sql);
+
+    // Fetch the updated view count from the database
+    $view_count_sql = "SELECT views FROM museums WHERE id = $museum_id";
+    $view_count_result = $conn->query($view_count_sql);
+    $view_count = 0;
+    if ($view_count_result->num_rows > 0) {
+        $view_data = $view_count_result->fetch_assoc();
+        $view_count = $view_data['views'];
+    }
+
     // Fetch the featured collections based on the museum name
     $museum_name = $conn->real_escape_string($museum['name']);
     $collection_sql = "SELECT * FROM collections WHERE museumName = '$museum_name'";
@@ -97,25 +157,32 @@
     // Close the database connection
     $conn->close();
     ?>
+
+
     <div class="museum-background"></div>
     <div class="image-container">
         <iframe id="main-iframe" src="<?php echo htmlspecialchars($initial_360_url); ?>" width="100%" height="600" style="border:none;" title="3D View"></iframe>
     </div>
-
-    <div class="museum-details">
-        <h2 id="display-name"><?php echo htmlspecialchars($museum['name']); ?></h2>
-
-        <h3>HISTORY</h3>
-        <p id="display-history"><?php echo htmlspecialchars($museum['history']); ?></p>
-
-        <h3>DESCRIPTION</h3>
-        <p id="display-description"><?php echo htmlspecialchars($museum['description']); ?></p>
-        
-        <!-- Button to trigger text-to-speech -->
-        <button onclick="readMuseumDetails()">Read Museum Details</button>
-        <button onclick="pauseSpeech()">Pause</button>
-        <button onclick="resumeSpeech()">Resume</button>
+     <!-- Display views at the top of the museum details -->
+     <div class="museum-views">
+        <strong>Views:</strong> <span style="font-size: 12px;"><?php echo $view_count; ?></span>
     </div>
+    
+    <div class="museum-details">
+    <h2 id="display-name"><?php echo htmlspecialchars($museum['name']); ?></h2>
+
+    <h3>HISTORY</h3>
+    <p id="display-history" style="text-align: left; text-indent: 40px;"><?php echo htmlspecialchars($museum['history']); ?></p>
+
+    <h3>DESCRIPTION</h3>
+    <p id="display-description" style="text-align: left; text-indent: 40px;"><?php echo htmlspecialchars($museum['description']); ?></p>
+    
+    <!-- Button to trigger text-to-speech -->
+    <button onclick="readMuseumDetails()">Read Museum Details</button>
+    <button onclick="pauseSpeech()">Pause</button>
+    <button onclick="resumeSpeech()">Resume</button>
+</div>
+
 
     <div class="featured-collections">
         <h2>FEATURED COLLECTIONS</h2>
