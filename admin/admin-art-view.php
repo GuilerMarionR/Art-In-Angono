@@ -5,20 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Art</title>
 <?php
-// Database connection
-$servername = "localhost"; // Your server name
-$username = "root"; // Your database username
-$password = ""; // Your database password
-$dbname = "art_in_angono_db"; // Your database name
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include '../includes/db_connections.php';
 // Search functionality
 $searchTerm = isset($_GET['search']) ? $_GET['search'] : ''; // Use GET for search
 $sql = "SELECT artworkID, title, artistName, imagePath FROM artworks WHERE title LIKE ? LIMIT ?, ?";

@@ -5,15 +5,11 @@ $closedDates = [];
 $closedTimes = [];
 $guestData = null;
 
-$db = new mysqli('localhost', 'root', '', 'art_in_angono_db');
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
-}
-
+include '../includes/db_connections.php';
 $museumName = isset($_GET['museum']) ? htmlspecialchars($_GET['museum']) : 'Unknown Museum';
 
 $query = "SELECT closed_date FROM closed_dates WHERE museumName = '$museumName'";
-$result = $db->query($query);
+$result = $conn->query($query);
 
 if ($result) {
     while ($row = $result->fetch_assoc()) {
@@ -28,7 +24,7 @@ $closedTimeQuery = "
     FROM closed_times 
     WHERE museumName = '$museumName' 
     AND date = '$appointmentDate'";
-$closedTimeResult = $db->query($closedTimeQuery);
+$closedTimeResult = $conn->query($closedTimeQuery);
 
 if ($closedTimeResult) {
     while ($row = $closedTimeResult->fetch_assoc()) {
@@ -42,7 +38,7 @@ if ($closedTimeResult) {
 if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $guestQuery = "SELECT * FROM guests WHERE username = '$username'";
-    $guestResult = $db->query($guestQuery);
+    $guestResult = $conn->query($guestQuery);
 
     if ($guestResult && $guestResult->num_rows > 0) {
         $guestData = $guestResult->fetch_assoc();

@@ -103,13 +103,8 @@ session_start();
         include '../includes/navigation-guest.php';
     }
 
-    // Connect to the database
-    $conn = new mysqli('localhost', 'root', '', 'art_in_angono_db');
+    include '../includes/db_connections.php';
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     // Get the museum ID from the URL
     $museum_id = isset($_GET['id']) ? intval($_GET['id']) : 0;

@@ -73,12 +73,7 @@ session_start();
         $museumName = 'Unknown Museum'; // Default value if not set
     }
 
-    // Database connection
-    $db = new mysqli('localhost', 'root', '', 'art_in_angono_db');
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
-
+    include '../includes/db_connections.php';
     // Get the current date in 'Y-m-d' format
     $currentDate = date('Y-m-d');
 
@@ -87,7 +82,7 @@ session_start();
         SELECT closed_date, reason 
         FROM closed_dates 
         WHERE museumName = '$museumName' AND closed_date >= '$currentDate'";
-    $closedDatesResult = $db->query($closedDatesQuery);
+    $closedDatesResult = $conn->query($closedDatesQuery);
     $closedDates = [];
 
     if ($closedDatesResult) {
@@ -101,7 +96,7 @@ session_start();
         SELECT date, startTime, endTime 
         FROM closed_times 
         WHERE museumName = '$museumName' AND date >= '$currentDate'";
-    $closedTimesResult = $db->query($closedTimesQuery);
+    $closedTimesResult = $conn->query($closedTimesQuery);
     $closedTimes = [];
 
     if ($closedTimesResult) {
@@ -111,7 +106,7 @@ session_start();
     }
 
     // Close database connection
-    $db->close();
+    $conn->close();
 ?>
 
 <div class="terms-container">

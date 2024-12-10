@@ -1,13 +1,9 @@
 <?php
 // fetch_closed_times.php
 if (isset($_GET['date']) && isset($_GET['museum'])) {
-    $db = new mysqli('localhost', 'root', '', 'art_in_angono_db');
-    if ($db->connect_error) {
-        die("Connection failed: " . $db->connect_error);
-    }
-
-    $appointmentDate = $db->real_escape_string($_GET['date']);
-    $museumName = $db->real_escape_string($_GET['museum']);
+   include '../includes/db_connections.php';
+    $appointmentDate = $conn->real_escape_string($_GET['date']);
+    $museumName = $conn->real_escape_string($_GET['museum']);
 
     $closedTimes = [];
     $query = "
@@ -16,7 +12,7 @@ if (isset($_GET['date']) && isset($_GET['museum'])) {
         WHERE museumName = '$museumName' 
         AND date = '$appointmentDate'";
 
-    $result = $db->query($query);
+    $result = $conn->query($query);
 
     if ($result) {
         while ($row = $result->fetch_assoc()) {

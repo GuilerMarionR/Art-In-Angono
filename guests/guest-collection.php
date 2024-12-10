@@ -244,14 +244,7 @@ session_start();
 <?php
 // Initialize $collections as an empty array
 $collections = [];
-
-// Database connection and fetching logic
-$conn = new mysqli('localhost', 'root', '', 'art_in_angono_db');
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include '../includes/db_connections.php';
 
 // Get the museum ID from the URL and validate
 $museum_id = isset($_GET['id']) ? intval($_GET['id']) : 0;

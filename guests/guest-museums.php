@@ -34,14 +34,7 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
     <!-- Gallery Section -->
     <div class="gallery">
         <?php
-        // Connect to the database
-        $conn = new mysqli('localhost', 'root', '', 'art_in_angono_db');
-
-        // Check the connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-
+       include '../includes/db_connections.php';
         // Define pagination variables
         $limit = 6; // Number of items per page
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
