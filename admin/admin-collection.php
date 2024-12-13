@@ -225,6 +225,11 @@ $conn->close();
                 alert("Screenshot and copying are disabled to protect copyright.");
             }
         });
+        window.onload = () => {
+    document.getElementById("imageModal").style.display = "none"; // Ensure hidden on load
+    console.log("Modal hidden on page load.");
+};
+
     </script>
 </head>
 <body>

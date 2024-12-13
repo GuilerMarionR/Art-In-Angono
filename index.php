@@ -93,7 +93,7 @@ session_start(); // Start the session to check login status
 
             <?php if (isset($_SESSION['username'])): ?>
                 <!-- User is logged in, show logout link -->
-                <a href="logins/logout.php">LOGOUT</a>
+                <a href="logins/logout_guests.php">LOGOUT</a>
             <?php else: ?>
                 <!-- User is not logged in, show login link -->
                 <a href="logins/login.php">LOGIN</a>

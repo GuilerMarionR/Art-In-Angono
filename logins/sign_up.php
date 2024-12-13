@@ -2,11 +2,14 @@
 session_start();
 include '../includes/db_connections.php';
 
+$firstName = $lastName = $middleName = $birthdate = $address = $email = $contactNumber = $username = $password = $confirmPassword = "";
+$error = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $middleName = $_POST['middleName'];
-    $birthdate = $_POST['birthdate']; // New birthdate field
+    $birthdate = $_POST['birthdate'];
     $address = $_POST['address'];
     $email = $_POST['email'];
     $contactNumber = $_POST['contactNumber'];
@@ -43,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $stmt->bind_param("sssssssss", $firstName, $lastName, $middleName, $birthdate, $address, $email, $contactNumber, $username, $password);
                         if ($stmt->execute()) {
                             $_SESSION['message'] = "Registration successful! Please log in.";
-                            header("Location: login.php");
+                            header("Location: guest_login.php");
                             exit();
                         } else {
                             $error = "Error: Could not register. Please try again.";
@@ -126,43 +129,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="form-group row">
                 <div class="col-md-6">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                    <input type="text" id="firstName" name="firstName" class="form-control" value="<?= htmlspecialchars($firstName); ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control" required>
+                    <input type="text" id="lastName" name="lastName" class="form-control" value="<?= htmlspecialchars($lastName); ?>" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-md-6">
                     <label for="middleName">Middle Name</label>
-                    <input type="text" id="middleName" name="middleName" class="form-control">
+                    <input type="text" id="middleName" name="middleName" class="form-control" value="<?= htmlspecialchars($middleName); ?>">
                 </div>
                 <div class="col-md-6">
                     <label for="birthdate">Birthdate</label>
-                    <input type="date" id="birthdate" name="birthdate" class="form-control" required>
+                    <input type="date" id="birthdate" name="birthdate" class="form-control" value="<?= htmlspecialchars($birthdate); ?>" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-md-6">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" required>
+                    <input type="email" id="email" name="email" class="form-control" value="<?= htmlspecialchars($email); ?>" required>
                 </div>
                 <div class="col-md-6">
                     <label for="contactNumber">Contact Number</label>
-                    <input type="text" id="contactNumber" name="contactNumber" class="form-control">
+                    <input type="text" id="contactNumber" name="contactNumber" class="form-control" value="<?= htmlspecialchars($contactNumber); ?>">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="address">Address</label>
-                <textarea id="address" name="address" class="form-control" required></textarea>
+                <textarea id="address" name="address" class="form-control" required><?= htmlspecialchars($address); ?></textarea>
             </div>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" id="username" name="username" class="form-control" required>
+                <input type="text" id="username" name="username" class="form-control" value="<?= htmlspecialchars($username); ?>" required>
                 <small class="form-text text-muted">Username must contain at least one number and one symbol (e.g., @, #, $, etc.).</small>
             </div>
 
@@ -182,9 +185,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn btn-danger" style="margin-left: 350px;">Sign Up</button>
         </form>
         <div class="login-link mt-3 text-center">
-            <p>Already have an account? <a href="login.php">Log in here</a>.</p>
+            <p>Already have an account? <a href="guest_login.php">Log in here</a>.</p>
         </div>
-  </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -225,6 +228,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 matchHelp.style.color = "green";
                 matchHelp.textContent = "Passwords match.";
+            }
+        });
+
+        document.getElementById('contactNumber').addEventListener('input', function() {
+            const contactNumber = this.value;
+            if (!/^\d{11}$/.test(contactNumber)) {
+                this.setCustomValidity("Contact number must be exactly 11 digits.");
+            } else {
+                this.setCustomValidity("");
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function() {
+            const email = this.value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                this.setCustomValidity("Please enter a valid email address.");
+            } else {
+                this.setCustomValidity("");
             }
         });
     </script>

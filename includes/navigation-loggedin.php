@@ -23,7 +23,7 @@
             <a href="../guests/guest-news.php">NEWS & EVENTS</a>
             <a href="../guests/guest-art.php">ARTWORKS</a>
             <a href="../guests/guest-book.php">BOOK A TOUR</a>
-            <a href="../logins/logout.php">LOGOUT</a>
+            <a href="../logins/logout_guests.php">LOGOUT</a>
             </div>
         </div>
         

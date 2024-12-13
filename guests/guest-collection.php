@@ -227,6 +227,11 @@ session_start();
                 alert("Screenshot and copying are disabled.");
             }
         });
+        window.onload = () => {
+    document.getElementById("imageModal").style.display = "none"; // Ensure hidden on load
+    console.log("Modal hidden on page load.");
+};
+
     </script>
 </head>
 <body>
