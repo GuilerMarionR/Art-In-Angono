@@ -145,7 +145,7 @@ $conn->close(); // Close the database connection
         <div class="admin-news-content">
             <div class="button-container">
                 <button class="action-button" onclick="location.href='admin-add-event.php'">Add Event</button>
-                <button class="action-button" onclick="location.href='admin-my-news.php'">View All Events</button>
+                <button class="action-button" onclick="location.href='admin-events.php'">View All Events</button>
          </div>
             <div class="news-events" id="news-events">
                 <div id="myEvents" class="events-container" style="display: flex; flex-wrap: wrap; justify-content: left;">

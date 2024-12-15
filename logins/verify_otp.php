@@ -32,73 +32,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Verify OTP</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background: linear-gradient(to right, #ffcccc, #ffffff); /* Soft gradient background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .container {
-            margin-top: 50px; /* Adjust margin for spacing */
-            max-width: 400px; /* Set maximum width for the container */
-            padding: 20px; /* Add padding for aesthetics */
-            background-color: #fff; /* White background for the form */
-            border-radius: 8px; /* Rounded corners for the container */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
-        }
-
-        h3 {
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 700; /* Bold heading */
-            text-align: center; /* Center the heading */
-        }
-
-        label {
-            font-weight: 600; /* Make labels more prominent */
-            color: #555;
-        }
-
-        input[type="text"] {
-            border: 1px solid #ccc; /* Light border */
-            border-radius: 5px;
-            padding: 10px; /* Padding for comfort */
-            font-size: 16px; /* Increase font size */
-            transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition */
-        }
-
-        input[type="text"]:focus {
-            border-color: #007bff; /* Focus border color */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow on focus */
-        }
-
-        .btn-danger {
-            background-color: #dc3545; /* Bootstrap danger color */
-            border: none;
-            border-radius: 5px;
-            padding: 12px; /* Consistent padding */
-            font-size: 16px; /* Increase font size */
-            width: 100%; /* Full width button */
-            transition: background-color 0.3s; /* Smooth background color transition */
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333; /* Darker red on hover */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        .custom-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <?php include '../includes/navigation-guest.php';?>
+    <?php include '../includes/navigation-guest.php'; ?>
     <div class="museum-background"></div>
-    <div class="container">
-        <h3>Verify OTP</h3>
-        <form method="POST">
-            <div class="form-group">
-                <label for="otp">Enter OTP:</label>
-                <input type="text" id="otp" name="otp" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-danger" style="margin-left: 350px;">Verify</button>
-        </form>
+    <div class="mt-5 d-flex justify-content-center">
+        <div class="custom-container">
+            <h1 class="text-center mb-4">Verify OTP</h1>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="otp">Enter OTP:</label>
+                    <input type="text" id="otp" name="otp" class="form-control" required>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                <a href="login.php" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-danger">Verify</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

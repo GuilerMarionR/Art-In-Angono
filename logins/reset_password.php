@@ -61,54 +61,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Reset Password</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background: linear-gradient(to right, #ffcccc, #ffffff); /* Soft gradient background */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .container {
-            margin-top: 50px; /* Adjust margin for spacing */
-            max-width: 400px; /* Set maximum width for the container */
-        }
-
-        h3 {
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 700; /* Bold heading */
-            text-align: center; /* Center the heading */
-        }
-
-        label {
-            font-weight: 600; /* Make labels more prominent */
-            color: #555;
-        }
-
-        .btn-danger {
-            background-color: #dc3545; /* Bootstrap danger color */
-            border: none;
-            border-radius: 5px;
-            padding: 12px; /* Consistent padding */
-            font-size: 16px; /* Increase font size */
-            width: 100%; /* Full width button */
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333; /* Darker red on hover */
+        .custom-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <?php include '../includes/navigation-guest.php'; // Include the navigation file?>
+    <?php include '../includes/navigation-guest.php'; ?>
     <div class="museum-background"></div>
-    <div class="container">
-        <h3>Reset Password</h3>
-        <form method="POST">
-            <div class="form-group">
-                <label for="new_password">New Password:</label>
-                <input type="password" id="new_password" name="new_password" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-danger" style="margin-left:350px;">Reset Password</button>
-        </form>
+    <div class=" mt-5 d-flex justify-content-center">
+        <div class="custom-container">
+            <h1 class="text-center mb-4">Reset Password</h1>
+            <form method="POST" >
+                <div class="form-group">
+                    <label for="new_password">New Password:</label>
+                    <input type="password" id="new_password" name="new_password" class="form-control" required>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                <a href="login.php" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-danger">Reset</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

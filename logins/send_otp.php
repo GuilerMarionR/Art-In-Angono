@@ -89,7 +89,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close(); // Close the database connection
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,27 +96,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/custom-styles.css"> <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="../css/custom-styles.css">
     <style>
-        /* Include the custom CSS styles defined above */
-        /* Your previous styles here */
+        .custom-container {
+            width: 400px;
+            padding: 30px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-    <?php include '../includes/navigation-guest.php'; ?> <!-- Include guest navigation -->
+    <?php include '../includes/navigation-guest.php'; ?>
     <div class="museum-background"></div>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h1 class="text-center">Enter Your Email Address</h1>
-                <form action="" method="post">
-                    <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-danger btn-block" style="margin-left: 100px;">Submit</button>
-                </form>
-            </div>
+    <div class="mt-5 d-flex justify-content-center">
+        <div class="custom-container">
+            <h1 class="text-center mb-4">Enter Your Email</h1>
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" name="email" id="email" class="form-control" required>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+                <a href="login.php" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 
