@@ -107,58 +107,97 @@ $conn->close();
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #downloadPDF {
-            padding: 10px 20px;
-            background-color: #C1121F;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-        #downloadPDF:hover {
-            background-color: grey;
-        }
-        .chart-container {
-            width: 80%;
-            margin: 0 auto;
-        }
-        .button-container {
-            margin-bottom: 20px;
-        }
+       /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .button {
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 5px;
-            background-color: #007bff; /* Default button color */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
 
-        .button:hover {
-            background-color: #0056b3; /* Darker default on hover */
-        }
-        .grey-button {
-            background-color: #6c757d; /* Grey */
-            color: white;
-        }
+/* Center the container */
+.container {
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .grey-button:hover {
-            background-color: #5a6268; /* Darker grey on hover */
-        }
+.museum-background {
+    width: 100%;
+    height: 200px;
+    background: url('your-background-image.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Button styles */
+#downloadPDF {
+    padding: 10px 20px;
+    background-color: #C1121F;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#downloadPDF:hover {
+    background-color: grey;
+}
+
+/* Chart container */
+.chart-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+/* Button Styles */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #6c757d; /* Default back button color */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #5a6268; /* Darker grey on hover */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #downloadPDF {
+        width: 100%;
+    }
+}
+
     </style>
 </head>
 <body>
 <div class="museum-background"></div>
 <?php include '../includes/navigation-admin.php'; ?>
-<div class="container" style="margin-left: 340px;">
+<div class="container">
     <h1>Museum Stats for <?php echo $museumName; ?></h1>
     <h3>Total Visits: </h3>
     <p>Past Visits: <?php echo $visits['past']; ?></p>
@@ -169,8 +208,8 @@ $conn->close();
         <canvas id="museumChart"></canvas>
     </div>
     <h3>Museum's Total Views: <?php echo $museumViews; ?></h3>
-    <a href="admin-museums.php" class="button grey-button">Back</a>
     <button id="downloadPDF">Download PDF</button>
+    <a href="admin-museums.php" class="button grey-button">Back</a>
    
 </div>
     <script>

@@ -37,23 +37,124 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Add Font Awesome CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        .password-container {
-            position: relative;
-            width: 100%;
-        }
-        .password-container input {
-            width: 100%;
-            padding-right: 40px; /* Space for the eye icon */
-        }
-        .password-container .eye-icon {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 18px;
-            margin-top: 10px; /* Add left margin for spacing */
-        }
+
+.login-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;  /* Limit the width of the login box */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Input group styling */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.password-container {
+    position: relative;
+}
+.password-container .eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 60%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Forgot password link and buttons */
+.forgot-password {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #007bff;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    text-decoration: none;
+}
+
+.sign-up-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #007bff;
+}
+
+.sign-up-link:hover {
+    text-decoration: underline;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .login-box {
+        padding: 15px;
+        max-width: 90%;  /* Allow the login box to take up more space on smaller screens */
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    .input-group input {
+        font-size: 0.9rem; /* Adjust input text size */
+    }
+
+    .password-container .eye-icon {
+        font-size: 16px; /* Slightly smaller icon on mobile */
+    }
+
+    .forgot-password {
+        font-size: 0.8rem;
+    }
+
+    button {
+        font-size: 0.9rem; /* Adjust button font size */
+    }
+}
+
     </style>
 </head>
 <body>

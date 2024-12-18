@@ -11,48 +11,83 @@ session_start();
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom Table Styling */
-        .table {
-            background-color: white;
-            text-align: center;
-        }
+.table {
+    background-color: white;
+    text-align: center;
+}
 
-        .table th, .table td {
-            vertical-align: middle;
-            text-align: center;
-        }
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+}
 
-        .terms-container {
-            padding: 20px;
-        }
+.terms-container {
+    padding: 20px;
+}
 
-        .terms-box {
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+/* Center content box */
+.terms-box {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 900px; /* Limit the max width */
+    margin: 0 auto;
+}
 
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
 
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
+/* Button styling */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 48%; /* Make buttons take up 48% of the container's width */
+}
 
-        .red-btn {
-            background-color: #ff4d4d;
-            color: white;
-        }
+/* Red button */
+.red-btn {
+    background-color: #ff4d4d;
+    color: white;
+}
 
-        .gray-btn {
-            background-color: #e0e0e0;
-            color: black;
-        }
+/* Gray button */
+.gray-btn {
+    background-color: #e0e0e0;
+    color: black;
+}
+
+/* On hover, add a hover effect */
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Adjust styles for mobile devices */
+@media (max-width: 768px) {
+    .terms-box {
+        padding: 15px; /* Reduce padding on mobile */
+    }
+
+    .btn {
+        font-size: 14px; /* Smaller font size on mobile */
+        padding: 10px 18px; /* Adjust padding for mobile */
+        width: 100%; /* Make buttons full width on mobile */
+    }
+
+    .button-container {
+        gap: 20px;
+    }
+}
+
     </style>
 </head>
 <body>

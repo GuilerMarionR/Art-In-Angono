@@ -140,7 +140,7 @@ function addWatermark($sourceImagePath, $watermarkedImagePath, $text) {
         </div>
         <div class="form-actions d-flex justify-content-between">
             <a href="admin-collection.php" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-danger">Upload Image</button>
+            <button type="submit" class="btn btn-danger">Upload</button>
         </div>
     </form>
 </div>

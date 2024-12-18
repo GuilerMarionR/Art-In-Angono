@@ -42,17 +42,8 @@ $conn->close(); // Close the database connection
     <title>ART IN ANGONO - All News & Events</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* General container style */
-        .container {
-            background-color: white; /* White background */
-            margin: 0 auto; /* Center container */
-            padding: 20px; /* Padding for spacing */
-            max-width: 1200px; /* Max width to prevent too wide content */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-        }
-
-        /* Add some styles for the modal */
-        .modal {
+         /* Add some styles for the modal */
+         .modal {
             display: none; 
             position: fixed; 
             z-index: 1000; 
@@ -123,7 +114,7 @@ $conn->close(); // Close the database connection
         }
 
         .back-button {
-            background-color: #007BFF; /* Blue background */
+            background-color: #C1121F; /* Blue background */
             color: white; /* White text */
             padding: 10px 15px; /* Padding for button */
             border: none; /* Remove border */
@@ -135,7 +126,7 @@ $conn->close(); // Close the database connection
         }
 
         .back-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+            background-color: #C1121F; /* Darker blue on hover */
         }
         .pagination {
             margin: 20px 0; /* Margin for pagination */
@@ -147,14 +138,14 @@ $conn->close(); // Close the database connection
             margin: 0 5px; /* Space between pagination links */
             padding: 10px; /* Padding for links */
             text-decoration: none; /* Remove underline */
-            border: 1px solid #007BFF; /* Border for links */
-            color: #007BFF; /* Blue text */
+            border: 1px solidrgb(8, 8, 8); /* Border for links */
+            color:rgb(36, 37, 39); /* Blue text */
             border-radius: 5px; /* Rounded corners */
             transition: background-color 0.3s; /* Transition for hover effect */
         }
 
         .pagination a:hover {
-            background-color: #007BFF; /* Blue background on hover */
+            background-color:rgb(5, 5, 5); /* Blue background on hover */
             color: white; /* White text on hover */
         }
 
@@ -162,7 +153,144 @@ $conn->close(); // Close the database connection
             margin: 0 5px; /* Space between pagination numbers */
             padding: 10px; /* Padding for numbers */
         }
-        
+        .all{
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+        /* General container style */
+.container {
+    background-color: white; /* White background */
+    margin: 0 auto; /* Center container */
+    padding: 20px; /* Padding for spacing */
+    max-width: 100%; /* Full width for smaller screens */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    box-sizing: border-box;
+}
+
+/* Make sure the search bar is responsive */
+.search-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end; /* Align search box to the right */
+    width: 100%;
+}
+
+#searchInput {
+    padding: 10px; /* Padding for search input */
+    border: 1px solid #ccc; /* Border for search input */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%; /* Full width on mobile */
+    max-width: 300px; /* Limit max width for larger screens */
+    transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+#searchInput:focus {
+    border-color: #007BFF; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Event card styles */
+.event-card {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    margin-bottom: 5px; /* Space between event cards */
+    padding-bottom: 15px;
+    border: 1px solid #ccc; /* Border for event cards */
+    border-radius: 5px; /* Rounded corners */
+    transition: box-shadow 0.3s; /* Smooth transition for hover effect */
+    width: 100%; /* Full width for smaller screens */
+    box-sizing: border-box;
+}
+
+.event-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+/* Adjust for mobile layout */
+@media (max-width: 768px) {
+    /* Adjust container width for smaller devices */
+    .container {
+        padding: 10px; /* Less padding on small screens */
+        width: 100%;
+    }
+
+    /* Search bar should be full-width on mobile */
+    .search-container {
+        width: 100%; /* Ensure search bar is full width on smaller screens */
+        display: block; /* Stack the search container */
+        margin-bottom: 15px;
+    }
+
+    #searchInput {
+        width: 100%; /* Full width search bar on smaller screens */
+        max-width: none;
+    }
+
+    /* Adjust event card layout for mobile */
+    .event-card {
+        padding: 15px;
+        font-size: 14px; /* Slightly smaller font */
+        margin-bottom: 20px; /* Add more spacing between cards */
+    }
+
+    /* Ensure event cards are stacked vertically */
+    .all-events-section {
+        display: block;
+    }
+
+    /* Pagination adjustments */
+    .pagination {
+        flex-direction: column; /* Stack pagination items on mobile */
+        align-items: center;
+    }
+
+    .pagination a {
+        padding: 8px; /* Smaller padding for pagination on mobile */
+        font-size: 14px;
+    }
+}
+
+/* Modal for displaying event details */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Reduce margin for better fit on mobile */
+    padding: 15px;
+    width: 80%; /* Modal width for mobile */
+    max-width: 500px; /* Limit modal width */
+}
+
+/* Adjust the modal for smaller screens */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%; /* Full width for mobile devices */
+        padding: 10px;
+    }
+
+    .close {
+        font-size: 24px; /* Smaller close button */
+    }
+}
+
+/* Modal for displaying event details */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Reduce margin for better fit on mobile */
+    padding: 15px;
+    width: 80%; /* Modal width for mobile */
+    max-width: 500px; /* Limit modal width */
+}
+
+/* Adjust the modal for smaller screens */
+@media (max-width: 600px) {
+    .modal-content {
+        width: 90%; /* Full width for mobile devices */
+        padding: 10px;
+    }
+
+    .close {
+        font-size: 24px; /* Smaller close button */
+    }
+}
+
     </style>
 </head>
 <body>

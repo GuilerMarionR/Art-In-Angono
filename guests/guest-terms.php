@@ -9,6 +9,86 @@ session_start();
     <title>ART IN ANGONO - Terms & Conditions</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
+<style>
+    /* Ensure the terms box fits the page nicely */
+.terms-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+}
+
+/* Center the terms content box */
+.terms-box {
+    width: 90%; /* Make it take 90% of the screen width */
+    max-width: 800px; /* Limit the maximum width to 800px */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: auto; /* Prevent overflow of content */
+}
+
+/* Terms text styling */
+.terms-text {
+    margin-bottom: 20px;
+}
+
+/* Button container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    margin-top: 20px;
+}
+
+/* Styling for the buttons */
+.btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%; /* Buttons will take 48% of the container's width */
+}
+
+/* Red button */
+.red-btn {
+    background-color: #C1121F;
+    color: white;
+}
+
+/* Gray button */
+.gray-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* On hover, add a hover effect */
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Adjust styles for mobile devices */
+@media (max-width: 768px) {
+    .terms-box {
+        padding: 15px; /* Reduce padding on mobile */
+    }
+
+    .btn {
+        font-size: 14px; /* Smaller text size for mobile */
+        padding: 10px 18px; /* Smaller padding on mobile */
+        width: 100%; /* Make buttons full width on mobile */
+    }
+
+    .button-container {
+        gap: 20px;
+    }
+}
+
+</style>
 <body>
 <?php 
     // Check if the user is logged in by checking for the session username

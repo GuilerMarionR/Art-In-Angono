@@ -73,6 +73,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             max-width: 100%; /* Responsive image */
             height: auto; /* Maintain aspect ratio */
         }
+        /* Responsive Design */
+@media screen and (max-width: 768px) {
+    .artwork-edit-layout {
+        max-width: 90%; /* Reduce width for tablets and smaller screens */
+        padding: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="tel"],
+    textarea {
+        font-size: 16px; /* Better readability */
+    }
+
+    .form-buttons .btn {
+        font-size: 14px; 
+        padding: 10px 15px; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .artwork-edit-layout {
+        max-width: 95%; /* Even narrower for very small devices */
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px; 
+    }
+
+    .form-group label {
+        font-size: 14px; 
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="tel"],
+    textarea {
+        font-size: 14px; 
+    }
+
+    .form-buttons .btn {
+        font-size: 12px; 
+        padding: 8px 12px; 
+    }
+
+    .button-group button {
+        width: 100%; /* Stack buttons on smaller devices */
+        margin: 5px 0;
+    }
+}
+
+/* Center Image Preview */
+.current-image img {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 5px;
+}
     </style>
 </head>
 <body>
@@ -144,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <!-- Submit and Cancel buttons -->
         <div class="form-buttons">
-            <button type="submit" class="btn save">Add Artwork</button>
+            <button type="submit" class="btn save">Upload</button>
             <button type="button" class="btn cancel" onclick="window.location.href='admin-my-art.php'">Cancel</button>
         </div>
     </form>

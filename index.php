@@ -19,58 +19,157 @@ session_start(); // Start the session to check login status
     background-color: #f5f5f5; /* Optional: Set a background color */
     padding: 50px 20px;
 }
+/* Navigation Bar Styles */
+/* Navigation Bar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C1121F;
+    padding: 10px 60px;
+    flex-shrink: 0;
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; /* Ensures the navbar spans the entire width */
+    width: 100%; /* Makes sure the navbar is full width */
+    box-sizing: border-box; /* Includes padding in the width calculation */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a shadow */
+}
+
+.logo {
+    display: flex;
+}
+
+.logo img {
+    margin-right: 10px;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+/* Welcome Content */
+.background-container {
+    padding: 30px 15px;
+}
 
 .welcome-content {
     display: flex;
-    flex-direction: row; /* Places image and text side by side */
-    align-items: center; /* Vertically centers content */
-    gap: 20px; /* Adds space between image and text */
-    max-width: 1200px; /* Limits the overall width of the section */
-    margin-right: 200px;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Styling the text section */
-.welcome-text {
-    margin-bottom: 150px;
+.welcome-text, .welcome-image {
     flex: 1;
-    text-align: left; /* Aligns text to the left */
 }
 
-.heading {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.subheading {
-    font-size: 1.2rem;
-    line-height: 1.6;
-}
-
-/* Styling the image */
 .welcome-image img {
-    max-width: 55%;
-    height: auto; /* Maintains aspect ratio */
-    margin-bottom: 150px;
-    border-radius: 10px; /* Optional: Adds rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
-    flex: 1; /* Ensures equal space with the text */
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive design for smaller screens */
+/* App Download Section */
+.app-download-section {
+    padding: 30px 15px;
+    text-align: center;
+}
+
+.app-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.app-text {
+    max-width: 600px;
+}
+
+.app-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
-    .welcome-content {
-        flex-direction: column; /* Stacks text and image vertically */
+    .navbar .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #C1121F;
+        position: absolute;
+        top: 60px;
+        padding: 10px;
+        width: 95%;
+    }
+
+    .navbar .menu.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .welcome-content, .app-content {
+        flex-direction: column;
         text-align: center;
     }
 
-    .welcome-text {
-        margin-bottom: 20px; /* Adds space between text and image */
+    .welcome-image img{
+        max-width: 40%;
+        margin-right: 30px;
     }
-
-    .welcome-image img {
-        max-width: 80%; /* Reduces image size on smaller screens */
-    }
+    .app-content img{
+    max-width: 30%;
+}
+.app-download-section{
+    max-width: 90%;
+}
+.app-text{
+    font-size: 12px;
+}
+.welcome-text h1{
+    font-size: 20px;
+}
+.welcome-text p{
+    font-size: 15px;
+    text-align: left;
+    max-width: 60%;
+    margin-left: 160px;
+}
+.logo img{
+    width:40px;
+    height: 50px;
+}
+.logo span{
+    font-size: 20px;
+}
 }
 </style>
 <body>
@@ -78,28 +177,32 @@ session_start(); // Start the session to check login status
       <!-- Navigation Bar -->
       <div class="navbar">
         <!-- Logo Section -->
-        <div class="logo">
-            <img src="https://i.imgur.com/BeaSiLw.png" alt="Logo" class="logo-img">
-            <span>ART IN ANGONO</span>
-        </div>
-        
-        <!-- Menu Section -->
-        <div class="menu">
-            <a href="index.php">HOME</a>
-            <a href="guests/guest-museums.php">MUSEUMS</a>
-            <a href="guests/guest-news.php">NEWS & EVENTS</a>
-            <a href="guests/guest-art.php">ARTWORKS</a>
-            <a href="guests/guest-book.php">BOOK A TOUR</a>
+       <!-- Navigation Bar -->
+<div class="navbar">
+    <div class="logo">
+        <img src="https://i.imgur.com/BeaSiLw.png" alt="Logo" class="logo-img">
+        <span>ART IN ANGONO</span>
+    </div>
+    
+    <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 
-            <?php if (isset($_SESSION['username'])): ?>
-                <!-- User is logged in, show logout link -->
-                <a href="logins/logout_guests.php">LOGOUT</a>
-            <?php else: ?>
-                <!-- User is not logged in, show login link -->
-                <a href="logins/login.php">LOGIN</a>
-            <?php endif; ?>
-        </div>
-      </div>
+    <div class="menu">
+        <a href="index.php">HOME</a>
+        <a href="guests/guest-museums.php">MUSEUMS</a>
+        <a href="guests/guest-news.php">NEWS & EVENTS</a>
+        <a href="guests/guest-art.php">ARTWORKS</a>
+        <a href="guests/guest-book.php">BOOK A TOUR</a>
+        <?php if (isset($_SESSION['username'])): ?>
+            <a href="logins/logout_guests.php">LOGOUT</a>
+        <?php else: ?>
+            <a href="logins/login.php">LOGIN</a>
+        <?php endif; ?>
+    </div>
+</div>
 
       <div class="background-container">
     <div class="welcome-content">
@@ -130,5 +233,12 @@ session_start(); // Start the session to check login status
 
     <!-- JavaScript file -->
     <script src="../js/script.js"></script>
+    <script>
+        function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    menu.classList.toggle('active');
+}
+
+    </script>
 </body>
 </html>

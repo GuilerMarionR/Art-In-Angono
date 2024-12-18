@@ -77,7 +77,27 @@ unset($_SESSION['formData']);
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
     <style>
-        /* Styling */
+      /* Container Adjustment */
+/* Default container width for larger screens */
+.container {
+    max-width: 900px;  /* Maximum width for larger screens */
+    width: 100%;       /* Ensure it fills the screen on smaller devices */
+    margin: 0 auto;    /* Center the container */
+}
+
+/* Mobile-specific adjustments for the container */
+@media (max-width: 768px) {
+    .container {
+        max-height: 600px;  /* Adjust max-width for tablets or medium-sized screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-height: 50%;    /* Set container to full width for smaller screens */
+    }
+}
+
     </style>
 </head>
 <body onload="initializeForm();">

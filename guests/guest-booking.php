@@ -78,99 +78,96 @@ $totalPages = ceil($totalRecords / $perPage);
 </head>
 <style>
 
-    /* Optional: Style for the tabs (if used) */
-    .tabs {
-        position: sticky;
-        top: 0;
-        z-index: 1000;  /* Ensure the tabs stay above other content */
-        background-color: #f1f1f1; /* Light background for tabs */
-        padding: 10px;  /* Adds spacing around the tabs */
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for tabs */
-    }
-    /* Fix table header to stay on top while scrolling */
-    thead {
-        position: sticky;
-        top: 0; /* Stay at the top */
-        background-color: #C1121F; /* Red background for header */
-        color: white; /* White text color */
-        z-index: 1; /* Ensure the header stays above the content */
-    }
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
 
-    /* Optional: Style for table rows on hover */
-    .table-striped tbody tr:hover {
-        background-color: #f5f5f5;
-    }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-    /* Add a white background for table rows to ensure clean appearance */
-    .tbody-white {
-        background-color: white;
-    }
+h1 {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+}
 
-    /* Style the table itself */
-    table {
-        width: 100%; /* Full width of the container */
-        border-collapse: collapse; /* Remove spaces between table borders */
-        margin-top: 20px; /* Space above the table */
-    }
+/* Make table scrollable on smaller screens */
+.table-wrapper {
+    overflow-x: auto; /* Enable horizontal scroll */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin-top: 20px;
+}
 
-    /* Table cell styling */
-    th, td {
-        padding: 10px; /* Padding inside cells */
-        text-align: left; /* Align text to the left */
-        border: 1px solid #ddd; /* Light gray border for cells */
-    }
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
 
-    .cancel-btn {
-    background-color: #C1121F; /* Red background for cancel button */
-    color: white; /* White text color */
-    border: none; /* Remove default button border */
-    padding: 8px; /* Adjust padding to fit the icon */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Adjust the font size */
-    border-radius: 5px; /* Rounded corners */
-    display: inline-flex; /* Allow icon and text to align nicely */
-    align-items: center; /* Center the icon vertically */
-    justify-content: center; /* Center the icon horizontally */
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+td{
+    background-color: white;
+}
+
+/* Sticky header */
+thead {
+    position: sticky;
+    top: 0;
+    background-color: #C1121F;
+    color: white;
+    z-index: 1;
+}
+
+/* Table rows on hover */
+.table-striped tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Style for buttons */
+.cancel-btn {
+    background-color: #C1121F;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .cancel-btn i {
-    font-size: 18px; /* Set icon size */
+    font-size: 18px;
 }
 
 .cancel-btn.cancel-btn-disabled {
-    background-color: #d3d3d3; /* Light gray background */
-    color: #888; /* Dark gray text */
-    border: 1px solid #ccc; /* Light gray border */
-    cursor: not-allowed; /* Not allowed cursor */
+    background-color: #d3d3d3;
+    color: #888;
+    border: 1px solid #ccc;
+    cursor: not-allowed;
 }
 
 .cancel-btn.cancel-btn-disabled i {
-    color: #888; /* Change the icon color for the disabled button */
+    color: #888;
 }
 
-    /* Make the whole table scrollable (if needed) */
-    .table-wrapper {
-        max-height: 400px; /* Set the max height for the table */
-        overflow-y: auto; /* Enable vertical scrolling */
-    }
-
-    /* Optional: Style for the tabs (if used) */
-   /* Centering the tabs */
-.tabs {
-    display: flex;
-    justify-content: center; /* Center align tabs */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: #f1f1f1;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Center the pagination links */
+/* Pagination */
 .pagination {
-    display: inline-flex; /* Align pagination links in a row */
-    justify-content: center; /* Center the links horizontally */
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -182,9 +179,6 @@ $totalPages = ceil($totalRecords / $perPage);
     border: 1px solid #C1121F;
     border-radius: 5px;
     font-size: 14px;
-    display: inline-flex;
-    justify-content: center; /* Ensure the link text is centered */
-    align-items: center; /* Vertically align the text */
 }
 
 .pagination a:hover {
@@ -197,11 +191,78 @@ $totalPages = ceil($totalRecords / $perPage);
     color: white;
 }
 
+/* Responsive Styles for smaller screens */
+@media (max-width: 768px) {
+    /* Stack buttons for mobile */
+    .cancel-btn {
+        width: 100%; /* Full width on small screens */
+        margin-top: 10px;
+    }
+
+    /* Adjust the font size and padding for smaller screens */
+    h1 {
+        font-size: 20px;
+    }
+
+    /* Stack table rows and allow horizontal scrolling */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 12px; /* Smaller text for table */
+    }
+
+     td {
+        padding: 8px;
+        background-color: white;
+    }
+
+    /* Pagination links adjustment */
+    .pagination a {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
+/* Container for the buttons */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    align-items: center; /* Align the buttons vertically */
+    margin-top: 20px; /* Add some space above the buttons */
+}
+
+/* Styling for the buttons */
+.button-container a {
+    margin: 0 10px; /* Add space between the buttons horizontally */
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    h1 {
+        font-size: 18px;
+    }
+
+    .cancel-btn {
+        font-size: 14px; /* Smaller buttons on very small screens */
+    }
+    .button-container {
+        flex-direction: column; /* Stack the buttons vertically on mobile */
+    }
+
+    .button-container a button {
+        width: 100%; /* Full width buttons on mobile */
+        padding: 12px; /* Larger padding for easier clicking */
+        font-size: 18px; /* Adjust font size for mobile */
+    }
+}
+
+
 </style>
 <body>
 <?php include '../includes/navigation-loggedin.php'; // Include navbar for logged-in users ?>
 <div class="museum-background"></div>
-<div style="margin-left:670px;">
+<div class="button-container">
     <a href="guest-book.php">
         <button>List of Museums</button>
     </a>
@@ -209,6 +270,7 @@ $totalPages = ceil($totalRecords / $perPage);
         <button>Booking History</button>
     </a>
 </div>
+
     <h1>Your Booking History</h1>
     <div class="table-wrapper">
     <table>

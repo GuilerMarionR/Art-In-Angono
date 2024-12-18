@@ -142,7 +142,7 @@ $conn->close();
        
         <div class="form-actions">
             <a href="admin-museums.php" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-danger">Update Collection</button>
+            <button type="submit" class="btn btn-danger">Update</button>
         </div>
     </form>
 </div>

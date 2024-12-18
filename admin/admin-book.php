@@ -140,35 +140,64 @@ $totalFutureBookings = $futureBookingsResult->num_rows;
 [data-bs-toggle="tooltip"] {
     cursor: pointer;
 }
-
-    .tab-content {
-        margin: 10 auto;
-        margin-left: 80px;
-        max-width: 80%; /* Adjust width as needed */
-    }
-    .edit{
-        margin-left: 600px;
-        margin-top: 80px;
-    }
-       .thead-red {
-        background-color: #C1121F;
-        color: white;
-    }
-    .btn-secondary {
-    background-color: #c0c0c0;
-    color: #ffffff;
-    cursor: not-allowed;
+/* Centering tables */
+.tab-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 90%; /* Default width */
+    overflow-x: auto;
 }
 
-    /* White background for table body */
-    .tbody-white {
-        background-color: white;
+.table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.thead-red {
+    background-color: #C1121F;
+    color: white;
+}
+
+.tbody-white {
+    background-color: white;
+}
+
+    @media (max-width: 768px) {
+    .button-group {
+        gap: 5px; /* Reduce gap between buttons */
+        justify-content: center; /* Ensure horizontal alignment */
     }
 
-    /* Optional: Style for table rows on hover (if needed) */
-    .table-striped tbody tr:hover {
-        background-color: #f5f5f5;
+    .button-group button {
+        padding: 8px 15px; /* Smaller button size */
+        font-size: 14px; /* Smaller text */
     }
+    .tab-content {
+        width: 100%; /* Full width on mobile */
+    }
+
+    .table {
+        font-size: 12px; /* Smaller text */
+    }
+
+    .table thead th, .table tbody td {
+        padding: 5px;
+    }
+
+    .icon-btn {
+        width: 40px; 
+        height: 40px; 
+        font-size: 1.2em;
+    }
+
+    .button-group button {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+}
 </style>
 <body>
 

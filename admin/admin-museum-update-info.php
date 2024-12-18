@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['updateMuseum'])) {
 
         <div class="form-buttons">
             <a href="admin-museums.php" class="btn cancel">Cancel</a>
-            <button type="submit" name="updateMuseum" class="btn save">Update Information</button>
+            <button type="submit" name="updateMuseum" class="btn save">Update</button>
         </div>
     </form>
 </div>

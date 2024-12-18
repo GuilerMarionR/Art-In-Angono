@@ -114,6 +114,25 @@ $museumName = htmlspecialchars($_SESSION['username']);
             max-width: 300px; /* Limit the size of the preview image */
             margin-top: 10px; /* Add margin to the top of the image */
         }
+        @media screen and (max-width: 480px) {
+    .artwork-edit-layout {
+        max-width: 95%; /* Even narrower for very small devices */
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px; /* Smaller heading for compact view */
+    }
+
+    .button-container {
+        text-align: center;
+    }
+
+    .upload-button, .save-button, .close-button {
+        font-size: 12px; /* Smaller button text size */
+        padding: 6px 10px; /* Adjust button padding */
+    }
+}
     </style>
 </head>
 <body>

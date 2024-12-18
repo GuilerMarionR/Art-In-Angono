@@ -22,6 +22,38 @@ if (!isset($_SESSION['username']) || empty($_SESSION['username'])) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 </head>
+<style>
+/* Adjustments for mobile screens */
+@media (max-width: 768px) {
+    .tabs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 380px;
+    }
+
+    /* Stack buttons for mobile */
+    .tab-content button {
+        width: 45%; /* Make buttons full-width on mobile */
+        max-width: none; /* Remove the max-width restriction */
+        margin: 10px 0; /* Add margin between buttons */
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    /* Adjust banner for smaller screens */
+    .banner {
+        padding: 15px;
+    }
+}
+
+</style>
 
 <body>
 

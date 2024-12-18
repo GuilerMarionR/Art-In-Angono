@@ -140,6 +140,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-width: 300px; /* Responsive image */
             height: auto; /* Maintain aspect ratio */
         }
+        @media screen and (max-width: 480px) {
+            .current-image img {
+            max-width: 200px; /* Responsive image */
+            height: auto; /* Maintain aspect ratio */
+        }
+}
     </style>
 </head>
 <body>
@@ -197,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="contact" name="contact" value="<?php echo $contact; ?>" required>
             </div>
             <div class="form-buttons">
-                <button type="submit" class="btn save">Save Changes</button>
+                <button type="submit" class="btn save">Save</button>
                 <button type="button" class="btn cancel" onclick="window.location.href='admin-my-art.php'">Cancel</button>
             </div>
         </form>

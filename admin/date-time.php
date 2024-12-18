@@ -62,28 +62,80 @@ $closed_times_result = $stmt->get_result();
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <style>
-    /* Style for graying out the disabled closed dates */
-    .ui-state-disabled.closed-date {
-        background-color: #ddd !important;
-        color: #bbb !important;
-        cursor: not-allowed !important;
+ /* Make the page elements responsive */
+body {
+    font-family: Arial, sans-serif;
+}
+
+
+/* Container for forms */
+.form-container {
+    width: 80%;
+    max-width: 600px;
+    margin: 20px auto;  /* This ensures the form is centered */
+    padding: 20px;
+    box-sizing: border-box; /* Makes sure padding doesn't affect width */
+}
+
+
+.button-group {
+        text-align: center; /* Center the button group */
     }
-    /* Prevent interaction with the disabled dates */
-    .ui-state-disabled {
-        pointer-events: none !important;
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    /* Adjust form container for mobile */
+    .form-container {
+        width: 60%; /* Ensure the form takes up more space on mobile */
+        margin-left: 0; /* Ensure no extra left margin */
+        margin-right: 0; /* Ensure no extra right margin */
     }
+
+    /* Form input field adjustments */
+    input[type="text"], select {
+        width: 100%;
+        padding: 8px;
+    }
+
+    /* Adjust button size */
+    button {
+        padding: 10px 20px;
+        width: 100%;
+    }
+
+    /* Table adjustment for mobile */
+    table th, table td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    /* Make button group aligned to the center */
+    .button-group {
+        text-align: center; /* Center the button group */
+    }
+}
+
+/* Styling for grayed-out disabled dates */
+.ui-state-disabled.closed-date {
+    background-color: #ddd !important;
+    color: #bbb !important;
+    cursor: not-allowed !important;
+}
+
+.ui-state-disabled {
+    pointer-events: none !important;
+}
 </style>
 <body>
 <?php include '../includes/navigation-admin.php'; ?>
 <div class="museum-background"></div>
-<div class="button-group text-center my-3" style="margin-left:725px;">
+<div class="button-group text-center my-3" >
     <a href="admin-book.php">
         <button>Guest List</button>
     </a>
 </div>
 <h1>Manage Closed Dates and Times</h1>
 
-<div class="form-container" style="margin-left:550px;">
+<div class="form-container" >
     <!-- Closed Dates Form -->
     <form method="POST" action="">
         <h3>Add Closed Date</h3>
@@ -98,7 +150,7 @@ $closed_times_result = $stmt->get_result();
 </div>
 <?php include 'closed_dates.php'; ?>
 
-<div class="form-container" style="margin-left:550px;">
+<div class="form-container" >
     <form method="POST" action="">
         <h3>Add Closed Time</h3>
         <label for="startTime">Start Time:</label>
@@ -140,7 +192,7 @@ $closed_times_result = $stmt->get_result();
 </div>
 
 <!-- Display Closed Times -->
-<h3>Closed Times</h3>
+    <h3>Closed Times</h3>
 <table border="1">
     <thead>
         <tr>
@@ -155,9 +207,10 @@ $closed_times_result = $stmt->get_result();
     <tbody>
         <?php while ($row = $closed_times_result->fetch_assoc()): ?>
             <tr>
-                <td><?php echo $row['startTime']; ?></td>
-                <td><?php echo $row['endTime']; ?></td>
-                <td><?php echo $row['date']; ?></td>
+                <!-- Format the start time and end time to 12-hour format with AM/PM -->
+                <td><?php echo date('h:i A', strtotime($row['startTime'])); ?></td>
+                <td><?php echo date('h:i A', strtotime($row['endTime'])); ?></td>
+                <td><?php echo date('Y-m-d', strtotime($row['date'])); ?></td>
                 <td><?php echo $row['reason']; ?></td>
                 <td><?php echo $row['museumName']; ?></td>
                 <td>

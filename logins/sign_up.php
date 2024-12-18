@@ -69,55 +69,140 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guest Signup</title>
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background: linear-gradient(to right, #ffcccc, #ffffff);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .container {
-            margin-top: 30px;
-            margin-bottom: 20px;
-            max-width: 500px;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        h3 {
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 700;
-            text-align: center;
-        }
-        label {
-            font-weight: 600;
-            color: #555;
-        }
-        .form-control {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            padding: 12px;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
+       body {
+    background: linear-gradient(to right, #ffcccc, #ffffff);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+label {
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 15px;
+        max-width: 90%; /* Allow the form to take more space on smaller screens */
+    }
+
+    h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 14px;
+    }
+
+    .btn-danger {
+        padding: 10px;
+        font-size: 14px;
+        margin-left:120px;
+    }
+
+    .col-md-6 {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .form-group {
+        margin-bottom: 8px;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+
+    .btn-danger {
+        padding: 8px;
+        font-size: 12px;
+        margin-left:120px;
+    }
+
+    .col-md-6 {
+        width: 100%;
+        margin-bottom: 10px; /* Stack form fields vertically on very small screens */
+    }
+
+    .login-link p {
+        font-size: 12px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -182,7 +267,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-danger" style="margin-left: 350px;">Sign Up</button>
+            <button type="submit" class="btn btn-danger" style="margin-left:135px;">Sign Up</button>
         </form>
         <div class="login-link mt-3 text-center">
             <p>Already have an account? <a href="guest_login.php">Log in here</a>.</p>
